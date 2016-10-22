@@ -13,6 +13,10 @@ return [
     |
     */
 
-    'dashboard.index' => '儀表板',
-    'user.index' => '使用者管理',
+    'dashboard' => '儀表板',
+    'carousels' => '輪播管理',
+    'magazines' => '校訓期刊管理',
+    'videos' => '影片管理',
+    'users' => '使用者管理',
+    'system' => '系統管理',
 ];
