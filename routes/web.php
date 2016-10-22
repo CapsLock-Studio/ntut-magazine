@@ -34,8 +34,9 @@ Route::group([
     'middleware' => 'auth',
 ], function() {
     Route::resource('/', 'DashboardController');
-    Route::resource('magazine', 'MagazoneController');
-    Route::resource('videos', 'VideoController');
-    Route::resource('user', 'UserController');
+    Route::resource('carousels', 'CarouselsController');
+    Route::resource('magazines', 'MagazonesController');
+    Route::resource('videos', 'VideosController');
+    Route::resource('users', 'UsersController');
     Route::resource('system', 'SystemController');
 });
