@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="/dist/css/skins/skin-red.min.css">
+  <link rel="stylesheet" href="/dist/css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="/plugins/iCheck/all.css"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,12 +27,12 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   <header class="main-header">
     <a href="index2.html" class="logo">
-      <span class="logo-mini"><br>NTUT</b></span>
-      <span class="logo-lg"><br>NTUT</b></span>
+      <span class="logo-mini">NTUT</b></span>
+      <span class="logo-lg">NTUT</b></span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -53,33 +53,39 @@
     <section class="sidebar">
       <ul class="sidebar-menu">
         <li class="{{ @$dashboard }}">
-          <a href="/dashboard">
+          <a href="/">
             <i class="fa fa-dashboard"></i>
             <span>儀表板</span>
           </a>
         </li>
-        <li class="{{ @$system }}">
-          <a href="/system">
+        <li class="{{ @$carousels }}">
+          <a href="/admin/carousels">
+            <i class="fa fa-exchange"></i>
+            <span>輪播管理</span>
+          </a>
+        </li>
+        <li class="{{ @$magazines }}">
+          <a href="/admin/magazines">
             <i class="fa fa-flag"></i>
-            <span>全域參數設定</span>
+            <span>校訊期刊管理</span>
           </a>
         </li>
-        <li class="{{ @$workflow }}">
-          <a href="/workflow">
-            <i class="fa fa-comments"></i>
-            <span>對話設定</span>
+        <li class="{{ @$videos }}">
+          <a href="/admin/videos">
+            <i class="fa fa-video-camera"></i>
+            <span>影片管理</span>
           </a>
         </li>
-        <li class="{{ @$message }}">
-          <a href="/message">
-            <i class="fa fa-comments-o"></i>
-            <span>儲存對話一覽</span>
-          </a>
-        </li>
-        <li class="{{ @$user }}">
-          <a href="/user">
+        <li class="{{ @$users }}">
+          <a href="/admin/users">
             <i class="fa fa-users"></i>
-            <span>線上使用者一覽</span>
+            <span>使用者管理</span>
+          </a>
+        </li>
+        <li class="{{ @$system }}">
+          <a href="/admin/system">
+            <i class="fa fa-power-off"></i>
+            <span>系統管理</span>
           </a>
         </li>
       </ul>
@@ -88,7 +94,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        {{ trans($title) }}
+        {{ trans("function_module.$title") }}
       </h1>
       <ol class="breadcrumb">
         @yield('breadcrumb')
