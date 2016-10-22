@@ -99,7 +99,7 @@
     </section>
   </div>
   <footer class="main-footer">
-    <strong>Copyright &copy; 2016 <a href="#">Hiiir, Inc</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2016 <a href="#">CapsLock Studio</a>.</strong> All rights reserved.
   </footer>
 </div>
 <div class="modal fade">
