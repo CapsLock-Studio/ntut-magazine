@@ -21,7 +21,7 @@
   <div class="register-logo">
     <a href="/register">
       <a href="#">
-        Hiiir
+        NTUT
       </a>
     </a>
   </div>

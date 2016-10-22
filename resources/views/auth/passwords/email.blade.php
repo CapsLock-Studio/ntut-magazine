@@ -21,7 +21,7 @@
   <div class="login-box">
     <div class="login-logo">
       <a href="#">
-        Hiiir
+        NTUT
       </a>
     </div>
     <div class="login-box-body">
