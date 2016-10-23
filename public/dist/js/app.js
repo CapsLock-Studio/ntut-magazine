@@ -62,6 +62,20 @@ $.dialogComplete = function() {
   });
 }
 
+$('a[method="DELETE"]').on('click', function(e) {
+  e.preventDefault();
+
+  var $this = $(this);
+  var formId = (new Date()).getTime();
+  var form = '<form method="POST" id="' + formId + '" action="' + $this.attr('href') + '">' +
+               '<input type="hidden" name="_method" value="' + $this.attr('method') + '">' +
+               '<input type="hidden" name="_token" value="' + $this.data('token') + '">' +
+             '</form>';
+
+  $('body').append(form);
+  $(formId).submit();
+});
+
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
   options.headers = {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
