@@ -66,14 +66,54 @@ $('a[method="DELETE"]').on('click', function(e) {
   e.preventDefault();
 
   var $this = $(this);
-  var formId = (new Date()).getTime();
-  var form = '<form method="POST" id="' + formId + '" action="' + $this.attr('href') + '">' +
-               '<input type="hidden" name="_method" value="' + $this.attr('method') + '">' +
-               '<input type="hidden" name="_token" value="' + $this.data('token') + '">' +
-             '</form>';
+  var confirmMessage = $this.data('confirm');
 
-  $('body').append(form);
-  $(formId).submit();
+  var submitForm = function(href, method, token) {
+    var formId = 'form-' + (new Date()).getTime();
+    var form = '<form method="POST" id="' + formId + '" action="' + href + '">' +
+                 '<input type="hidden" name="_method" value="' + method + '">' +
+                 '<input type="hidden" name="_token" value="' + token + '">' +
+               '</form>';
+
+    $('body').append(form);
+    $(form).submit();
+  }
+
+  if (typeof confirmMessage != 'undefined' && confirmMessage != '') {
+    var modelId = 'modal-' + (new Date()).getTime();
+    var model = '<div class="modal fade" id="' + modelId + '">' + 
+                  '<div class="modal-dialog">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                          '<span aria-hidden="true">×</span></button>' +
+                        '<h4 class="modal-title">請注意</h4>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                        '<p>' + confirmMessage + '</p>' +
+                      '</div>' +
+                      '<div class="modal-footer">' +
+                        '<button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>' +
+                        '<button type="button" class="confirm btn btn-danger" data-dismiss="modal">確認</button>' +
+                      '</div>' +
+                    '</div>' +
+                    '<!-- /.modal-content -->' +
+                  '</div>' +
+                  '<!-- /.modal-dialog -->' +
+                '</div>';
+
+    $('body').append(model);
+    $('#' + modelId)
+      .modal('show')
+      .on('hidden.bs.modal', function() {
+        $(this).remove();
+      })
+      .on('click', 'button.confirm', function() {
+        submitForm($this.attr('href'), $this.attr('method'), $this.data('token'));
+      });
+  } else {
+    submitForm($this.attr('href'), $this.attr('method'), $this.data('token'));
+  }
 });
 
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
