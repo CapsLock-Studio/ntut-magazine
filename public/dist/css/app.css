@@ -1,3 +1,7 @@
 .ui-state-highlight {
   border: dashed 3px;
 }
+
+#alert-message {
+  display: none;
+}

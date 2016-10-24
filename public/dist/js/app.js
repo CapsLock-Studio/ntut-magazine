@@ -116,6 +116,93 @@ $('a[method="DELETE"]').on('click', function(e) {
   }
 });
 
+$(function () {
+  "use strict";
+
+  var flashMessage = $('#flash-message');
+  var message = flashMessage.html();
+
+  if (flashMessage.length <= 0 || typeof message == 'undefined' || message == '') {
+    return;
+  }
+
+  var status = flashMessage.data('status');
+
+  var statusColors = {
+    info: '#00c0ef',
+    danger: '#dd4b39',
+    warning: '#f39c12',
+    success: '#00a65a',
+  }
+
+  /**
+   * Create ThemeQuarry ad
+   */
+  var wrapper_css = {
+    "padding": "20px 30px",
+    "background": statusColors[status],
+    "display": "none",
+    "z-index": "999999",
+    "font-size": "16px",
+    "font-weight": 600,
+  };
+
+  var link_css = {
+    "color": "rgba(255, 255, 255, 0.9)",
+    "display": "inline-block",
+    "margin-right": "10px",
+    "text-decoration": "none"
+  };
+
+  var link_hover_css = {
+    "text-decoration": "underline",
+    "color": "#f9f9f9"
+  }
+
+  var btn_css = {
+    "margin-top": "-5px",
+    "border": "0",
+    "box-shadow": "none",
+    "color": statusColors[status],
+    "font-weight": "600",
+    "background": "#fff"
+  };
+
+  var close_css = {
+    "color": "#fff",
+    "font-size": "20px"
+  }
+
+  var wrapper = $("<div />").css(wrapper_css);
+  var link = $("<a />")
+    .html(message)
+    .css(link_css)
+    .hover(function () {
+      $(this).css(link_hover_css);
+    }, function () {
+      $(this).css(link_css);
+    });
+  var close = $("<a />", {
+    "class": "pull-right",
+    href: "#",
+  }).html("&times;")
+    .css(close_css)
+    .click(function (e) {
+      e.preventDefault();
+      $(wrapper).slideUp();
+      if (ds) {
+        ds.setItem("no_show", true);
+      }
+    });
+
+  wrapper.append(close);
+  wrapper.append(link);
+
+  $(".content-wrapper").prepend(wrapper);
+
+  wrapper.hide(4).delay(500).slideDown();
+});
+
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
   options.headers = {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
