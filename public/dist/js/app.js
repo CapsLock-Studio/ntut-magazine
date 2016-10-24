@@ -389,7 +389,8 @@ $.AdminLTE.options = {
     sm: 768,
     md: 992,
     lg: 1200
-  }
+  },
+  validateForm: true,
 };
 
 /* ------------------
@@ -466,6 +467,10 @@ $(function () {
       var box = $(this).parents('.direct-chat').first();
       box.toggleClass('direct-chat-contacts-open');
     });
+  }
+
+  if (o.validateForm) {
+    $.AdminLTE.validateForm.activate();
   }
 
   /*
@@ -851,6 +856,31 @@ function _init() {
       //Find the box parent
       var box = element.parents(".box").first();
       box.slideUp(this.animationSpeed);
+    }
+  };
+
+  $.AdminLTE.validateForm = {
+    activate: function(selector) {
+      if (selector == null) {
+        selector = $(".validate-form");
+      }
+      if (jQuery().validate) {
+        return selector.each(function(i, elem) {
+          return $(elem).validate({
+            errorElement: "span",
+            errorClass: "help-block has-error",
+            errorPlacement: function(e, t) {
+              return t.parents(".controls").first().append(e);
+            },
+            highlight: function(e) {
+              return $(e).closest('.form-group').removeClass("has-error has-success").addClass('has-error');
+            },
+            success: function(e) {
+              return e.closest(".form-group").removeClass("has-error");
+            }
+          });
+        });
+      }
     }
   };
 }

@@ -14,6 +14,8 @@
   <script src="/plugins/fileinput/bootstrap-fileinput.js"></script>
   <script src="/plugins/input-mask/jquery.inputmask.js"></script>
   <script src="/plugins/input-mask/jquery.inputmask.regex.extensions.js"></script>
+  <script src="/plugins/validate/jquery.validate.min.js"></script>
+  <script src="/plugins/validate/additional-methods.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
   <script src="/dist/js/components.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
