@@ -116,6 +116,49 @@ $('a[method="DELETE"]').on('click', function(e) {
   }
 });
 
+if (jQuery().bootstrapFileInput) {
+  $('input[type=file]').bootstrapFileInput();
+}
+$('body').on('change', '.file-input-wrapper input[type=file]', function(){
+    if (this.files && this.files[0]) {
+        var $this = $(this);
+        var image =  $this.parent().prev('img');
+
+        if (image.length <= 0) {
+            image = $this.parent().prev('.crop').find('img');
+        }
+
+        var fileReader = new FileReader();
+        fileReader.onload = function(e) {
+
+            // there is two ways to show image preview for user
+            // if the input field has class 'fit-placeholder-size', the preview image will fill the size of placeholder image
+            if ($this.hasClass('fit-placeholder-size')) {
+                if (image.parent('.crop').length <= 0) {
+                    image.wrap('<div class="crop"></div>' );
+                    image.parent('.crop').css({
+                        width: image.width() + 'px',
+                        height: image.height() + 'px',
+                        'background-size': 'cover',
+                        'background-position': 'center',
+                        'background-repeat': 'no-repeat'
+                    });
+                }
+                image.css({
+                    display: 'none'
+                }).parent('.crop').css({
+                        'background-image': 'url(' + e.target.result + ')'
+                    });
+            } else {
+                image.attr('src', e.target.result);
+            }
+        };
+        fileReader.readAsDataURL(this.files[0]);
+    }
+}).on('click', '[data-dismiss-id]', function(){
+    $('#' + $(this).data('dismiss-id')).remove();
+});
+
 $(function () {
   "use strict";
 

@@ -11,6 +11,7 @@
   <script src="/plugins/jQuery/jquery.validate.min.js"></script>
   <script src="/plugins/jQueryUI/jquery-ui.min.js"></script>
   <script src="/plugins/iCheck/icheck.min.js"></script>
+  <script src="/plugins/fileinput/bootstrap-fileinput.js"></script>
   <script src="/plugins/input-mask/jquery.inputmask.js"></script>
   <script src="/plugins/input-mask/jquery.inputmask.regex.extensions.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
