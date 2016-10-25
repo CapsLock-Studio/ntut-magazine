@@ -79,7 +79,6 @@ class CarouselsController extends Controller
 
     public function order(Request $request)
     {
-        // $carousels = Carousel::find(array_map(function($param) { return $param['id']; }, $request->carousels));
         $carousels = $request->carousels;
         $results = [];
 

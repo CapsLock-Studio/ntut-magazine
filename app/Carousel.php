@@ -16,9 +16,9 @@ class Carousel extends Model implements StaplerableInterface {
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('image', [
             'styles' => [
-                'large' => '1920x800',
-                'medium' => '960x400',
-                'thumb' => '480x200',
+                'large' => '1920x800#',
+                'medium' => '960x400#',
+                'thumb' => '480x200#',
             ],
             'default_url' => 'https://placeholdit.imgix.net/~text?txtsize=33&txt=1920%C3%97800&w=960&h=400',
         ]);

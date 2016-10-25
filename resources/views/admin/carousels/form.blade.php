@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-sm-8 col-xs-12">
           <div class="image-preview-box">
-            <img src="{{ $carousel->image->url('thumb') }}" class="img-responsive" style="width:100%;" />
+            <img src="{{ $carousel->image->url('medium') }}" class="img-responsive" style="width:100%;" />
             <input title="選擇圖片" class="btn btn-default btn-block fit-placeholder-size" type="file" name="image" />
           </div>
         </div>
