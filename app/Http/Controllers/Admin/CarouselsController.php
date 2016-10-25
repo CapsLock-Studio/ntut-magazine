@@ -24,16 +24,19 @@ class CarouselsController extends Controller
     public function store(Request $request)
     {
         try {
+            $lastCarousel = Carousel::orderBy('order', 'DESC')->get()->first();
+            $lastOrder = $lastCarousel ? $lastCarousel->order : 0;
+
             $carousel = Carousel::create(
                 array_merge(
                     $request->except('_token'), 
-                    ['order' => Carousel::orderBy('order', 'DESC')->get()->first()->order]
+                    ['order' => $lastOrder]
                 )
             );
 
             $request->session()->flash('flashMessage', "編號 {$carousel->id} 新增成功。");
             $request->session()->flash('flashStatus', 'success');
-        } catch (QueryException $exception) {
+        } catch (ErrorException $exception) {
             $request->session()->flash('flashMessage', "新增失敗，請洽系統管理員協詢處理。");
             $request->session()->flash('flashStatus', 'warning');
         }
