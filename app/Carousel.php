@@ -11,7 +11,7 @@ class Carousel extends Model implements StaplerableInterface {
     use EloquentTrait;
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
-    protected $fillable = ['image', 'order', 'title'];
+    protected $fillable = ['image', 'order', 'title', 'url'];
 
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('image', [
