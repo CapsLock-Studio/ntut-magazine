@@ -21,6 +21,26 @@ class CarouselsController extends Controller
         view()->share('carousel', new Carousel);
     }
 
+    public function store(Request $request)
+    {
+        try {
+            $carousel = Carousel::create(
+                array_merge(
+                    $request->except('_token'), 
+                    ['order' => Carousel::orderBy('order', 'DESC')->get()->first()->order]
+                )
+            );
+
+            $request->session()->flash('flashMessage', "編號 {$carousel->id} 新增成功。");
+            $request->session()->flash('flashStatus', 'success');
+        } catch (QueryException $exception) {
+            $request->session()->flash('flashMessage', "新增失敗，請洽系統管理員協詢處理。");
+            $request->session()->flash('flashStatus', 'warning');
+        }
+
+        return redirect()->action('Admin\CarouselsController@index');
+    }
+
     public function destroy(Request $request, $id)
     {
         if (Carousel::destroy($id)) {
