@@ -34,6 +34,8 @@ Route::group([
     'middleware' => 'auth',
 ], function() {
     Route::resource('/', 'DashboardController');
+
+    Route::put('carousels/order', 'CarouselsController@order');
     Route::resource('carousels', 'CarouselsController');
     Route::resource('magazines', 'MagazonesController');
     Route::resource('videos', 'VideosController');

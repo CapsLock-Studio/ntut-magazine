@@ -9,9 +9,13 @@
   <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
   <script src="/plugins/jQuery/jquery.md5.min.js"></script>
   <script src="/plugins/jQuery/jquery.validate.min.js"></script>
+  <script src="/plugins/jQueryUI/jquery-ui.min.js"></script>
   <script src="/plugins/iCheck/icheck.min.js"></script>
+  <script src="/plugins/fileinput/bootstrap-fileinput.js"></script>
   <script src="/plugins/input-mask/jquery.inputmask.js"></script>
   <script src="/plugins/input-mask/jquery.inputmask.regex.extensions.js"></script>
+  <script src="/plugins/validate/jquery.validate.min.js"></script>
+  <script src="/plugins/validate/additional-methods.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
   <script src="/dist/js/components.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
@@ -20,6 +24,7 @@
   <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/dist/css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="/plugins/iCheck/all.css"></script>
+  <link rel="stylesheet" href="/dist/css/app.css"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -52,37 +57,37 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="{{ @$dashboard }}">
+        <li class="{{ @$controller_dashboard }}">
           <a href="/">
             <i class="fa fa-dashboard"></i>
             <span>儀表板</span>
           </a>
         </li>
-        <li class="{{ @$carousels }}">
+        <li class="{{ @$controller_carousels }}">
           <a href="/admin/carousels">
             <i class="fa fa-exchange"></i>
             <span>輪播管理</span>
           </a>
         </li>
-        <li class="{{ @$magazines }}">
+        <li class="{{ @$controller_magazines }}">
           <a href="/admin/magazines">
             <i class="fa fa-flag"></i>
             <span>校訊期刊管理</span>
           </a>
         </li>
-        <li class="{{ @$videos }}">
+        <li class="{{ @$controller_videos }}">
           <a href="/admin/videos">
             <i class="fa fa-video-camera"></i>
             <span>影片管理</span>
           </a>
         </li>
-        <li class="{{ @$users }}">
+        <li class="{{ @$controller_users }}">
           <a href="/admin/users">
             <i class="fa fa-users"></i>
             <span>使用者管理</span>
           </a>
         </li>
-        <li class="{{ @$system }}">
+        <li class="{{ @$controller_system }}">
           <a href="/admin/system">
             <i class="fa fa-power-off"></i>
             <span>系統管理</span>
@@ -124,7 +129,7 @@
     </div>
   </div>
 </div>
-<script src="/dist/js/app.min.js"></script>
-<script src="/dist/js/pages/{{ $controller }}.min.js"></script>
+<script src="/dist/js/app{{ App::environment('production') ? '.min' : '' }}.js"></script>
+<script src="/dist/js/pages/{{ $controller }}{{ App::environment('production') ? '.min' : '' }}.js"></script>
 </body>
 </html>

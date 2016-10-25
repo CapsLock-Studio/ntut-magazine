@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
         //
 
         /*

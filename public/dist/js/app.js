@@ -62,6 +62,190 @@ $.dialogComplete = function() {
   });
 }
 
+$('a[method="DELETE"]').on('click', function(e) {
+  e.preventDefault();
+
+  var $this = $(this);
+  var confirmMessage = $this.data('confirm');
+
+  var submitForm = function(href, method, token) {
+    var formId = 'form-' + (new Date()).getTime();
+    var form = '<form method="POST" id="' + formId + '" action="' + href + '">' +
+                 '<input type="hidden" name="_method" value="' + method + '">' +
+                 '<input type="hidden" name="_token" value="' + token + '">' +
+               '</form>';
+
+    $('body').append(form);
+    $(form).submit();
+  }
+
+  if (typeof confirmMessage != 'undefined' && confirmMessage != '') {
+    var modelId = 'modal-' + (new Date()).getTime();
+    var model = '<div class="modal fade" id="' + modelId + '">' + 
+                  '<div class="modal-dialog">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                          '<span aria-hidden="true">×</span></button>' +
+                        '<h4 class="modal-title">請注意</h4>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                        '<p>' + confirmMessage + '</p>' +
+                      '</div>' +
+                      '<div class="modal-footer">' +
+                        '<button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>' +
+                        '<button type="button" class="confirm btn btn-danger" data-dismiss="modal">確認</button>' +
+                      '</div>' +
+                    '</div>' +
+                    '<!-- /.modal-content -->' +
+                  '</div>' +
+                  '<!-- /.modal-dialog -->' +
+                '</div>';
+
+    $('body').append(model);
+    $('#' + modelId)
+      .modal('show')
+      .on('hidden.bs.modal', function() {
+        $(this).remove();
+      })
+      .on('click', 'button.confirm', function() {
+        submitForm($this.attr('href'), $this.attr('method'), $this.data('token'));
+      });
+  } else {
+    submitForm($this.attr('href'), $this.attr('method'), $this.data('token'));
+  }
+});
+
+if (jQuery().bootstrapFileInput) {
+  $('input[type=file]').bootstrapFileInput();
+}
+$('body').on('change', '.file-input-wrapper input[type=file]', function(){
+    if (this.files && this.files[0]) {
+        var $this = $(this);
+        var image =  $this.parent().prev('img');
+
+        if (image.length <= 0) {
+            image = $this.parent().prev('.crop').find('img');
+        }
+
+        var fileReader = new FileReader();
+        fileReader.onload = function(e) {
+
+            // there is two ways to show image preview for user
+            // if the input field has class 'fit-placeholder-size', the preview image will fill the size of placeholder image
+            if ($this.hasClass('fit-placeholder-size')) {
+                if (image.parent('.crop').length <= 0) {
+                    image.wrap('<div class="crop"></div>' );
+                    image.parent('.crop').css({
+                        width: image.width() + 'px',
+                        height: image.height() + 'px',
+                        'background-size': 'cover',
+                        'background-position': 'center',
+                        'background-repeat': 'no-repeat'
+                    });
+                }
+                image.css({
+                    display: 'none'
+                }).parent('.crop').css({
+                        'background-image': 'url(' + e.target.result + ')'
+                    });
+            } else {
+                image.attr('src', e.target.result);
+            }
+        };
+        fileReader.readAsDataURL(this.files[0]);
+    }
+}).on('click', '[data-dismiss-id]', function(){
+    $('#' + $(this).data('dismiss-id')).remove();
+});
+
+$(function () {
+  "use strict";
+
+  var flashMessage = $('#flash-message');
+  var message = flashMessage.html();
+
+  if (flashMessage.length <= 0 || typeof message == 'undefined' || message == '') {
+    return;
+  }
+
+  var status = flashMessage.data('status');
+
+  var statusColors = {
+    info: '#00c0ef',
+    danger: '#dd4b39',
+    warning: '#f39c12',
+    success: '#00a65a',
+  }
+
+  /**
+   * Create ThemeQuarry ad
+   */
+  var wrapper_css = {
+    "padding": "20px 30px",
+    "background": statusColors[status],
+    "display": "none",
+    "z-index": "999999",
+    "font-size": "16px",
+    "font-weight": 600,
+  };
+
+  var link_css = {
+    "color": "rgba(255, 255, 255, 0.9)",
+    "display": "inline-block",
+    "margin-right": "10px",
+    "text-decoration": "none"
+  };
+
+  var link_hover_css = {
+    "text-decoration": "underline",
+    "color": "#f9f9f9"
+  }
+
+  var btn_css = {
+    "margin-top": "-5px",
+    "border": "0",
+    "box-shadow": "none",
+    "color": statusColors[status],
+    "font-weight": "600",
+    "background": "#fff"
+  };
+
+  var close_css = {
+    "color": "#fff",
+    "font-size": "20px"
+  }
+
+  var wrapper = $("<div />").css(wrapper_css);
+  var link = $("<a />")
+    .html(message)
+    .css(link_css)
+    .hover(function () {
+      $(this).css(link_hover_css);
+    }, function () {
+      $(this).css(link_css);
+    });
+  var close = $("<a />", {
+    "class": "pull-right",
+    href: "#",
+  }).html("&times;")
+    .css(close_css)
+    .click(function (e) {
+      e.preventDefault();
+      $(wrapper).slideUp();
+      if (ds) {
+        ds.setItem("no_show", true);
+      }
+    });
+
+  wrapper.append(close);
+  wrapper.append(link);
+
+  $(".content-wrapper").prepend(wrapper);
+
+  wrapper.hide(4).delay(500).slideDown();
+});
+
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
   options.headers = {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -205,7 +389,8 @@ $.AdminLTE.options = {
     sm: 768,
     md: 992,
     lg: 1200
-  }
+  },
+  validateForm: true,
 };
 
 /* ------------------
@@ -282,6 +467,10 @@ $(function () {
       var box = $(this).parents('.direct-chat').first();
       box.toggleClass('direct-chat-contacts-open');
     });
+  }
+
+  if (o.validateForm) {
+    $.AdminLTE.validateForm.activate();
   }
 
   /*
@@ -667,6 +856,31 @@ function _init() {
       //Find the box parent
       var box = element.parents(".box").first();
       box.slideUp(this.animationSpeed);
+    }
+  };
+
+  $.AdminLTE.validateForm = {
+    activate: function(selector) {
+      if (selector == null) {
+        selector = $(".validate-form");
+      }
+      if (jQuery().validate) {
+        return selector.each(function(i, elem) {
+          return $(elem).validate({
+            errorElement: "span",
+            errorClass: "help-block has-error",
+            errorPlacement: function(e, t) {
+              return t.parents(".controls").first().append(e);
+            },
+            highlight: function(e) {
+              return $(e).closest('.form-group').removeClass("has-error has-success").addClass('has-error');
+            },
+            success: function(e) {
+              return e.closest(".form-group").removeClass("has-error");
+            }
+          });
+        });
+      }
     }
   };
 }

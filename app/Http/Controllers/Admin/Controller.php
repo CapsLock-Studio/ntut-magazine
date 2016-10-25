@@ -29,7 +29,7 @@ class Controller extends BaseController
         $actionName = end($actionName);
 
         view()->share("controller", $controllerName);
-        view()->share($controllerName, "active");
+        view()->share("controller_{$controllerName}", "active");
         if (Auth::check() && !request()->wantsJson()) {
             view()->share("title", $controllerName);
             echo view("${namespace}.${controllerName}.${actionName}");
