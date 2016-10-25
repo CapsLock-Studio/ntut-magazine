@@ -41,7 +41,7 @@
                     @foreach ($carousels as $carousel)
                       <tr>
                         <input type="hidden" class="sort-item" name="carousels[{{ $carousel->id }}][order]" value="{{ $carousel->order }}" />
-                        <input type="hidden" class="sort-item" name="carousels[{{ $carousel->id }}][id]" value="{{ $carousel->id }}" />
+                        <input type="hidden" name="carousels[{{ $carousel->id }}][id]" value="{{ $carousel->id }}" />
                         <td>
                           <div class="preview">
                             <img src="{{ $carousel->image->url('thumb') }}" />
