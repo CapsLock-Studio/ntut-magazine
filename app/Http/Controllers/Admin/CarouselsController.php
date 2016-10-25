@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Carousel;
+
 class CarouselsController extends Controller
 {
 
@@ -14,6 +16,11 @@ class CarouselsController extends Controller
         view()->share('flashMessage', $request->session()->get('flashMessage'));
         view()->share('flashStatus', $request->session()->get('flashStatus'));
         view()->share('carousels', Carousel::orderBy('order')->get());
+    }
+
+    public function edit(Request $request, $id)
+    {
+        view()->share('carousel', Carousel::find($id));
     }
 
     public function create(Request $request)
@@ -38,6 +45,19 @@ class CarouselsController extends Controller
             $request->session()->flash('flashStatus', 'success');
         } catch (ErrorException $exception) {
             $request->session()->flash('flashMessage', "新增失敗，請洽系統管理員協詢處理。");
+            $request->session()->flash('flashStatus', 'warning');
+        }
+
+        return redirect()->action('Admin\CarouselsController@index');
+    }
+
+    public function update(Request $request, $id)
+    {
+        if (Carousel::find($id)->update($request->except('_token'))) {
+            $request->session()->flash('flashMessage', "編號 {$id} 修改成功。");
+            $request->session()->flash('flashStatus', 'success');
+        } else {
+            $request->session()->flash('flashMessage', '改失敗，請洽系統管理員協詢處理。');
             $request->session()->flash('flashStatus', 'warning');
         }
 
