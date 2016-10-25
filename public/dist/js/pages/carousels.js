@@ -7,7 +7,7 @@
 
         sortable.on('sortupdate', function(event, ui){
             $('.sort-item').each(function(index){
-                $(this).val(index + 1);
+                $(this).val(index);
             });
         });
     }
