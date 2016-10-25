@@ -16,6 +16,11 @@ class CarouselsController extends Controller
         view()->share('carousels', Carousel::orderBy('order')->get());
     }
 
+    public function create(Request $request)
+    {
+        view()->share('carousel', new Carousel);
+    }
+
     public function destroy(Request $request, $id)
     {
         if (Carousel::destroy($id)) {
