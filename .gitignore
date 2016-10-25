@@ -6,3 +6,4 @@ Homestead.json
 .env
 dump.rdb
 /tmp
+/public/system/*
