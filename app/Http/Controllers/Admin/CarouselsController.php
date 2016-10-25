@@ -76,4 +76,25 @@ class CarouselsController extends Controller
 
         return redirect()->action('Admin\CarouselsController@index');
     }
+
+    public function order(Request $request)
+    {
+        // $carousels = Carousel::find(array_map(function($param) { return $param['id']; }, $request->carousels));
+        $carousels = $request->carousels;
+        $results = [];
+
+        foreach ($carousels as $carousel) {
+            array_push($results, Carousel::find($carousel['id'])->update(['order' => $carousel['order']]));
+        }
+
+        if (array_reduce($results, function($previous, $current) { return $previous & $current; }, true)) {
+            $request->session()->flash('flashMessage', "排序儲存成功。");
+            $request->session()->flash('flashStatus', 'success');
+        } else {
+            $request->session()->flash('flashMessage', '儲存失敗，請洽系統管理員協詢處理。');
+            $request->session()->flash('flashStatus', 'warning');
+        }
+
+        return redirect()->action('Admin\CarouselsController@index');
+    }
 }
