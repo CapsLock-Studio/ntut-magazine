@@ -13,7 +13,7 @@ class CarouselsController extends Controller
     {
         view()->share('flashMessage', $request->session()->get('flashMessage'));
         view()->share('flashStatus', $request->session()->get('flashStatus'));
-        view()->share('carousels', Carousel::all());
+        view()->share('carousels', Carousel::orderBy('order')->get());
     }
 
     public function destroy(Request $request, $id)
