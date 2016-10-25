@@ -6,6 +6,12 @@
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
       <div class="col-sm-12">
+        @if ($carousels->count() > 0)
+          <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <label><i class="icon fa fa-info"></i> 提醒您!</label>&nbsp;&nbsp;抓著輪播項目可以進行排序。
+          </div>
+        @endif
         <div class="box bordered-box sea-blue-border" style="margin-bottom:0;">
           <div class="box-header">
             <div class="title">
