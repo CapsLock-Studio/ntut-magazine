@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-sm-4 col-xs-12">
           <div class="image-preview-box">
-            <img src="{{ $magazine->image->url('medium') }}" class="img-responsive" />
+            <img src="{{ $magazine->image->url('medium') }}" class="img-responsive" style="width: 100%;" />
             <input title="選擇圖片" class="btn btn-default btn-block" type="file" name="image" />
           </div>
         </div>
