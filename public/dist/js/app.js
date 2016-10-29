@@ -37,6 +37,39 @@ $.param = function(name) {
   }
 }
 
+$('.data-table').DataTable({
+  "paging": true,
+  "lengthChange": true,
+  "searching": true,
+  "ordering": true,
+  "info": true,
+  "autoWidth": false,
+  "order": [[ 0, 'desc' ]],
+  'language': {
+    "decimal":        "",
+    "emptyTable":     "沒有任何資料。",
+    "info":           "目前顯示的範圍是 _START_ 到 _END_ ，全部共有 _TOTAL_ 筆資料",
+    "infoEmpty":      "目前並沒有任何資料",
+    "infoFiltered":   "(filtered from _MAX_ total entries)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "每頁顯示 _MENU_ ",
+    "loadingRecords": "讀取中...",
+    "processing":     "處理中...",
+    "search":         "搜尋:",
+    "zeroRecords":    "找不到任何資料",
+    "paginate": {
+        "first":      "第一頁",
+        "last":       "最後一頁",
+        "next":       "下一頁",
+        "previous":   "上一頁"
+    },
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    },
+  }
+});
 
 $.dialogComplete = function() {
   $('.modal-footer > button').off('click');
