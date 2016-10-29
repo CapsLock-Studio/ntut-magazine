@@ -6,21 +6,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>NTUT 校訓管理系統</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
-  <script src="/plugins/jQuery/jquery.md5.min.js"></script>
-  <script src="/plugins/jQuery/jquery.validate.min.js"></script>
-  <script src="/plugins/jQueryUI/jquery-ui.min.js"></script>
-  <script src="/plugins/iCheck/icheck.min.js"></script>
-  <script src="/plugins/fileinput/bootstrap-fileinput.js"></script>
-  <script src="/plugins/input-mask/jquery.inputmask.js"></script>
-  <script src="/plugins/input-mask/jquery.inputmask.regex.extensions.js"></script>
-  <script src="/plugins/validate/jquery.validate.min.js"></script>
-  <script src="/plugins/validate/additional-methods.js"></script>
-  <script src="/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/dist/js/components.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap.css">
   <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/dist/css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="/plugins/iCheck/all.css"></script>
@@ -129,6 +118,20 @@
     </div>
   </div>
 </div>
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/plugins/jQuery/jquery.md5.min.js"></script>
+<script src="/plugins/jQuery/jquery.validate.min.js"></script>
+<script src="/plugins/jQueryUI/jquery-ui.min.js"></script>
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="/plugins/iCheck/icheck.min.js"></script>
+<script src="/plugins/fileinput/bootstrap-fileinput.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.regex.extensions.js"></script>
+<script src="/plugins/validate/jquery.validate.min.js"></script>
+<script src="/plugins/validate/additional-methods.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/dist/js/components.min.js" type="text/javascript"></script>
 <script src="/dist/js/app{{ App::environment('production') ? '.min' : '' }}.js"></script>
 <script src="/dist/js/pages/{{ $controller }}{{ App::environment('production') ? '.min' : '' }}.js"></script>
 </body>
