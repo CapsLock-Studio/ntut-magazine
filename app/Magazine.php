@@ -8,7 +8,7 @@ use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 
 class Magazine extends Model implements StaplerableInterface {
-{
+    
     use EloquentTrait;
 
     protected $fillable = ['image', 'title'];
