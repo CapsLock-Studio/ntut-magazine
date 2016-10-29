@@ -37,23 +37,6 @@ $.param = function(name) {
   }
 }
 
-$.dialogSuccess = function() {
-  $('.modal-title').text('提示訊息');
-  $('.modal').removeClassPrefix('modal-');
-  $('.modal').addClass('modal-primary');
-  $('.modal-body').text('資料設定完成');
-  $('.modal-footer > button').text('確定');
-  $('.modal').modal('show');
-}
-
-$.dialogError = function() {
-  $('.modal-title').text('提示訊息');
-  $('.modal').removeClassPrefix('modal-');
-  $('.modal').addClass('modal-primary');
-  $('.modal-body').text('資料設定完成');
-  $('.modal-footer > button').text('確定');
-  $('.modal').modal('show');
-}
 
 $.dialogComplete = function() {
   $('.modal-footer > button').off('click');
