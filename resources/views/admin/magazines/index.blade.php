@@ -20,39 +20,18 @@
         <div class="box-body">
           <div class="responsive-table">
             <div class="scrollable-table sortable-container">
-              <table class="table table-bordered table-striped data-table" style="margin-bottom:0;">
+              <table class="table table-bordered table-striped data-table" style="margin-bottom:0;" 
+                data-source="/api/magazines" data-trash="false" data-detail="false">
                 <thead>
                 <tr>
                   <th>編號</th>
-                  <th>圖片</th>
-                  <th>文字</th>
-                  <th></th>
+                  <th class="no-sort">圖片</th>
+                  <th class="no-sort">文字</th>
+                  <th class="no-sort"></th>
                 </tr>
                 </thead>
                 <tbody id="sortable" data-sortable-axis="y" data-sortable-connect=".sortable">
-                @foreach ($magazines as $magazine)
-                  <tr>
-                    <td>{{ $magazine->id }}</td>
-                    <td>
-                      <div class="preview">
-                        <img src="{{ $magazine->image->url('thumb') }}" style="width: 200px;" />
-                      </div>
-                    </td>
-                    <td>
-                      {{ $magazine->title }}
-                    </td>
-                    <td>
-                      <div class='text-right'>
-                        <a class="btn btn-default" href="/admin/magazines/{{ $magazine->id }}/edit">
-                          <i class='fa fa-pencil'></i>
-                        </a>
-                        <a href="/admin/magazines/{{ $magazine->id }}" class="btn btn-danger" method="DELETE" data-token="{{ csrf_token() }}" data-confirm="你確定要刪除嗎？提醒您，刪除後的資料無法回覆。">
-                          <i class='fa fa-remove'></i>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                @endforeach
+                
                 </tbody>
               </table>
             </div>
