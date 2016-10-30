@@ -14,7 +14,6 @@ class MagazinesController extends Controller
     {
         view()->share('flashMessage', $request->session()->get('flashMessage'));
         view()->share('flashStatus', $request->session()->get('flashStatus'));
-        view()->share('magazines', Magazine::all());
     }
 
     public function create(Request $request)
