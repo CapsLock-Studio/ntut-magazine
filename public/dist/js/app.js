@@ -27,33 +27,92 @@ $.fn.removeClassPrefix = function(prefix) {
     return this;
 };
 
-// get parameter from url
-$.param = function(name) {
-  var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-  if (results) {
-    return results[1] || 0;
+$('.data-table').each(function(i, elem) {
+  var languageOption = {
+    "decimal":        "",
+    "emptyTable":     "沒有任何資料。",
+    "info":           "目前顯示的範圍是 _START_ 到 _END_ ，全部共有 _TOTAL_ 筆資料",
+    "infoEmpty":      "目前並沒有任何資料",
+    "infoFiltered":   "(filtered from _MAX_ total entries)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "每頁顯示 _MENU_ ",
+    "loadingRecords": "讀取中...",
+    "processing":     "處理中...",
+    "search":         "搜尋:",
+    "zeroRecords":    "找不到任何資料",
+    "paginate": {
+        "first":      "第一頁",
+        "last":       "最後一頁",
+        "next":       "下一頁",
+        "previous":   "上一頁"
+    },
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    },
+  };
+
+  if (typeof $(elem).data('source') != 'undefined') {
+    var isShowDetail = (typeof $(elem).data("detail") == "undefined" || $(elem).data("detail"));
+    var isShowEdit = (typeof $(elem).data("edit") == "undefined" || $(elem).data("edit"));
+    var isShowRemove = (typeof $(elem).data("remove") == "undefined" || $(elem).data("remove"));
+    var isShowTrash = (typeof $(elem).data("trash") == "undefined" || $(elem).data("trash"));
+
+    dt = $(elem).DataTable({
+      processing: true,
+      serverSide: true,
+      stateSave: true,
+      ajax: $(elem).data('source'),
+      "iDisplayLength": $(elem).data("pagination-records") || 25,
+      language: languageOption,
+      columnDefs: [ {
+        targets: 'no-sort',
+        orderable: false,
+      }, {
+        targets: -1,
+        data: null,
+        render: function(data, type, full, meta) {
+          var controlActions = "";
+
+          if (typeof data[data.length - 1].disable == "undefined") {
+            data[data.length - 1].disable = [];
+          }
+
+          if (isShowDetail) {
+            controlActions += "<a href=\"" + data[data.length - 1].target + "\" class=\"btn btn-default detail " + ((data[data.length - 1].disable.indexOf("detail") > -1)? "disabled" : "") + "\">詳細</a>";
+          }
+
+          if (isShowEdit) {
+            controlActions += "<a href=\"" + data[data.length - 1].target + "/edit\" class=\"btn btn-default edit " + ((data[data.length - 1].disable.indexOf("edit") > -1)? "disabled" : "") + "\"><i class=\"fa fa-pencil\"></i></a>";
+          }
+
+          if (isShowRemove) {
+            controlActions += "<a method=\"DELETE\" data-confirm=\"你確定要刪除嗎？提醒您，刪除後的資料無法回覆。\" href=\"" + data[data.length - 1].target + "\" class=\"btn btn-danger remove " + ((data[data.length - 1].disable.indexOf("remove") > -1)? "disabled" : "") + "\"><i class=\"fa fa-remove\"></i></a>";
+          }
+
+          if (isShowTrash) {
+            controlActions += "<a method=\"DELETE\" data-confirm=\"你確定要刪除嗎？提醒您，刪除後的資料無法回覆。\" href=\"" + data[data.length - 1].target + "\" class=\"btn btn-danger trash " + ((data[data.length - 1].disable.indexOf("trash") > -1)? "disabled" : "") + "\"><i class=\"fa fa-trash\"></i></a>";
+          }
+
+          return "<div class=\"pull-right btn-toolbar\">" + controlActions + "</div>";
+        }
+      }],
+      order: [[0, 'desc']]
+    });
   } else {
-    return null;
+    dt = $(elem).dataTable({
+      stateSave: true,
+      "iDisplayLength": $(elem).data("pagination-records") || 25,
+      language: languageOption,
+      columnDefs: [ {
+        targets: 'no-sort',
+        orderable: false,
+      }],
+      order: [[0, 'desc']]
+    });
   }
-}
-
-$.dialogSuccess = function() {
-  $('.modal-title').text('提示訊息');
-  $('.modal').removeClassPrefix('modal-');
-  $('.modal').addClass('modal-primary');
-  $('.modal-body').text('資料設定完成');
-  $('.modal-footer > button').text('確定');
-  $('.modal').modal('show');
-}
-
-$.dialogError = function() {
-  $('.modal-title').text('提示訊息');
-  $('.modal').removeClassPrefix('modal-');
-  $('.modal').addClass('modal-primary');
-  $('.modal-body').text('資料設定完成');
-  $('.modal-footer > button').text('確定');
-  $('.modal').modal('show');
-}
+});
 
 $.dialogComplete = function() {
   $('.modal-footer > button').off('click');
@@ -62,7 +121,7 @@ $.dialogComplete = function() {
   });
 }
 
-$('a[method="DELETE"]').on('click', function(e) {
+$('body').on('click', 'a[method="DELETE"]', function(e) {
   e.preventDefault();
 
   var $this = $(this);
