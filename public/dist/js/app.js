@@ -126,6 +126,7 @@ $('body').on('click', 'a[method="DELETE"]', function(e) {
 
   var $this = $(this);
   var confirmMessage = $this.data('confirm');
+  var token = $('meta[name="csrf-token"]').attr('content');
 
   var submitForm = function(href, method, token) {
     var formId = 'form-' + (new Date()).getTime();
@@ -168,10 +169,10 @@ $('body').on('click', 'a[method="DELETE"]', function(e) {
         $(this).remove();
       })
       .on('click', 'button.confirm', function() {
-        submitForm($this.attr('href'), $this.attr('method'), $this.data('token'));
+        submitForm($this.attr('href'), $this.attr('method'), token);
       });
   } else {
-    submitForm($this.attr('href'), $this.attr('method'), $this.data('token'));
+    submitForm($this.attr('href'), $this.attr('method'), token);
   }
 });
 
