@@ -8,7 +8,7 @@
             <label>期刊列表</label>
             <div class="pull-right btn-toolbar">
               <a class="btn btn-default" href="/admin/magazines/create">
-                新增輪播
+                新增
               </a>
             </div>
           </div>
