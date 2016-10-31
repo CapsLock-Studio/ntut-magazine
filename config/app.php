@@ -126,6 +126,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Google OAuth 2.0 access
+    |--------------------------------------------------------------------------
+    |
+    | Keys for OAuth 2.0 access, see the API console at
+    | https://developers.google.com/console
+    |
+    */
+    'client_id' => '',
+    'client_secret' => '',
+    'redirect_uri' => '',
+    'scopes' => [],
+    'access_type' => 'online',
+    'approval_prompt' => 'auto',
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
