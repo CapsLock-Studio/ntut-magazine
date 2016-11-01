@@ -67,7 +67,30 @@ class VideosController extends Controller
 
     public function create(Request $request)
     {
+        $token = $request->session()->get('token');
+        $categories = [];
 
+        if (!empty($token)) {
+            try {
+                $client = Google::getClient();
+                $client->setAccessToken($token);
+
+                $youtube = new \Google_Service_YouTube($client);
+                $categoriesResponse = $youtube->videoCategories->listVideoCategories('snippet', [ 'hl' => 'zh-TW', 'regionCode' => 'TW' ]);
+
+                $categories = array_map(function($category) {
+                    return [ 'categoryId' => $category['snippet']['channelId'], 'categoryName' => $category['snippet']['title'] ];
+                }, $categoriesResponse['items']);
+
+            } catch (\Google_Service_Exception $e) {
+                $request->session()->set('token', null);
+            } catch (\Google_Exception $e) {
+                $request->session()->set('token', null);
+            }
+        }
+
+        view()->share('video', new Video);
+        view()->share('categories', $categories);
     }
 
     public function edit(Request $request, $id)
