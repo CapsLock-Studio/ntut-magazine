@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="/dist/css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="/plugins/iCheck/all.css"></script>
   <link rel="stylesheet" href="/dist/css/app.css"></script>
+  <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <script src="/plugins/jQuery/jquery.md5.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -118,8 +120,6 @@
     </div>
   </div>
 </div>
-<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="/plugins/jQuery/jquery.md5.min.js"></script>
 <script src="/plugins/jQuery/jquery.validate.min.js"></script>
 <script src="/plugins/jQueryUI/jquery-ui.min.js"></script>
 <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
