@@ -79,7 +79,7 @@ class VideosController extends Controller
                 $categoriesResponse = $youtube->videoCategories->listVideoCategories('snippet', [ 'hl' => 'zh-TW', 'regionCode' => 'TW' ]);
 
                 $categories = array_map(function($category) {
-                    return [ 'categoryId' => $category['snippet']['channelId'], 'categoryName' => $category['snippet']['title'] ];
+                    return [ 'categoryId' => $category['id'], 'categoryName' => $category['snippet']['title'] ];
                 }, $categoriesResponse['items']);
 
             } catch (\Google_Service_Exception $e) {
