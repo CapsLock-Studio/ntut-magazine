@@ -115,8 +115,6 @@ class VideosController extends Controller
         if (empty($token)) {
             $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
             $request->session()->flash('flashStatus', 'danger');
-
-            return redirect()->action('Admin\VideosController@index');
         }
 
         try {
@@ -170,23 +168,19 @@ class VideosController extends Controller
             $request->session()->flash('flashMessage', "上傳 YouTube 成功，{$status['id']} - {$status['snippet']['title']}");
             $request->session()->flash('flashStatus', 'success');
 
-            return redirect()->action('Admin\VideosController@index');
-
         } catch (\Google_Service_Exception $e) {
             $request->session()->set('token', null);
 
             $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
             $request->session()->flash('flashStatus', 'danger');
-
-            return redirect()->action('Admin\VideosController@index');
         } catch (\Google_Exception $e) {
             $request->session()->set('token', null);
 
             $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
             $request->session()->flash('flashStatus', 'danger');
-
-            return redirect()->action('Admin\VideosController@index');
         }
+
+        return redirect()->action('Admin\VideosController@index');
     }
 
     public function update(Request $request, $id)
