@@ -190,6 +190,44 @@ class VideosController extends Controller
 
     public function destroy(Request $request, $id)
     {
+        $token = $request->session()->get('token');
+        $video = Video::find($id);
 
+        if (empty($video)) {
+            $request->session()->flash('flashMessage', '不存在的影片');
+            $request->session()->flash('flashStatus', 'warning');
+
+        } else if (empty($token)) {
+            $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+            $request->session()->flash('flashStatus', 'danger');
+
+        } else {
+            $client = Google::getClient();
+            $client->setAccessToken($token);
+
+            try {
+                $youtube = new \Google_Service_YouTube($client);
+                $youtube->videos->delete($video->youtubeId);
+
+                $request->session()->flash('flashMessage', "影片 {$video->youtubeId} - {$video->title} 已從 YouTube 刪除成功。");
+                $request->session()->flash('flashStatus', 'success');
+
+                $video->delete();
+
+            } catch (\Google_Service_Exception $e) {
+                $request->session()->set('token', null);
+
+                $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+                $request->session()->flash('flashStatus', 'danger');
+
+            } catch (\Google_Exception $e) {
+                $request->session()->set('token', null);
+
+                $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+                $request->session()->flash('flashStatus', 'danger');
+            }
+        }
+
+        return redirect()->action('Admin\VideosController@index');
     }
 }
