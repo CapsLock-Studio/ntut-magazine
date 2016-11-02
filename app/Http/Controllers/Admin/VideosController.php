@@ -100,7 +100,83 @@ class VideosController extends Controller
 
     public function store(Request $request)
     {
+        $token = $request->session()->get('token');
 
+        if (empty($token)) {
+            $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+            $request->session()->flash('flashStatus', 'danger');
+
+            return redirect()->action('Admin\VideosController@index');
+        }
+
+        try {
+            $client = Google::getClient();
+            $client->setAccessToken($token);
+
+            $youtube = new \Google_Service_YouTube($client);
+
+            $snippet = new \Google_Service_YouTube_VideoSnippet();
+            $snippet->setTitle($request->title);
+            $snippet->setDescription($request->description);
+            $snippet->setCategoryId($request->categoryId);
+
+            $status = new \Google_Service_YouTube_VideoStatus();
+            $status->privacyStatus = 'public';
+
+            $video = new \Google_Service_YouTube_Video();
+            $video->setSnippet($snippet);
+            $video->setStatus($status);
+
+            $chunkSizeBytes = 1 * 1024 * 1024;
+
+            $client->setDefer(true);
+
+            $insertRequest = $youtube->videos->insert('status,snippet', $video);
+
+            $media = new \Google_Http_mediaFileUpload(
+                $client,
+                $insertRequest,
+                'video/*',
+                null,
+                true,
+                $chunkSizeBytes
+            );
+
+            $video = $request->file('video');
+
+            $media->setFileSize(filesize($video->path()));
+
+            $status = false;
+            $handle = fopen($video->path(), 'rb');
+            while (!$status && !feof($handle)) {
+                $chunk = fread($handle, $chunkSizeBytes);
+                $status = $media->nextChunk($chunk);
+            }
+
+            fclose($handle);
+
+            $client->setDefer(false);
+
+            $request->session()->flash('flashMessage', "上傳 YouTube 成功，{$status['id']} - {$status['snippet']['title']}");
+            $request->session()->flash('flashStatus', 'success');
+
+            return redirect()->action('Admin\VideosController@index');
+
+        } catch (\Google_Service_Exception $e) {
+            $request->session()->set('token', null);
+
+            $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+            $request->session()->flash('flashStatus', 'danger');
+
+            return redirect()->action('Admin\VideosController@index');
+        } catch (\Google_Exception $e) {
+            $request->session()->set('token', null);
+
+            $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+            $request->session()->flash('flashStatus', 'danger');
+
+            return redirect()->action('Admin\VideosController@index');
+        }
     }
 
     public function update(Request $request, $id)
