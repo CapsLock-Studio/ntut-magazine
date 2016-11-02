@@ -12,7 +12,7 @@
         <div class="col-sm-6 col-xs-12">
           <div class="form-group">
             <label>影片類別</label>
-            <select class="form-control">
+            <select class="form-control" name="categoryId">
               @foreach ($categories as $categorie)
                 <option {{ $categorie['categoryId'] == $video->categoryId ? 'selected="selected"' : '' }} value="{{ $categorie['categoryId'] }}">{{ $categorie['categoryName'] }}</option>
               @endforeach
