@@ -27,6 +27,8 @@ class VideosController extends Controller
                 // currently authenticated user's channel.
                 $channelsResponse = $youtube->channels->listChannels('contentDetails', [ 'mine' => 'true' ]);
 
+                $videoIdsFromApi = [];
+
                 foreach ($channelsResponse['items'] as $channel) {
                     // Extract the unique playlist ID that identifies the list of videos
                     // uploaded to the channel, and then call the playlistItems.list method
@@ -40,6 +42,7 @@ class VideosController extends Controller
 
                     foreach ($playlistItemsResponse['items'] as $playlistItem) {
                         $videoId = $playlistItem['snippet']['resourceId']['videoId'];
+                        $videoIdsFromApi[] = $videoId;
 
                         $video = Video::where('youtubeId', $videoId)->first();
 
@@ -54,6 +57,13 @@ class VideosController extends Controller
                         $video->save();
                     }
                 }
+
+                $youtubeIdsFromDB = Video::select('youtubeId')->get()->map(function($video) { return $video->youtubeId; })->toArray();
+
+                $idsNeedToDelete = array_diff($youtubeIdsFromDB, $videoIdsFromApi);
+
+                Video::whereIn('youtubeId', $idsNeedToDelete)->delete();
+
             } catch (\Google_Service_Exception $e) {
                 $request->session()->set('token', null);
             } catch (\Google_Exception $e) {
