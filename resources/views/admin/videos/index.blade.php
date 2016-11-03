@@ -21,11 +21,12 @@
           <div class="responsive-table">
             <div class="scrollable-table sortable-container">
               <table class="table table-bordered table-striped data-table" style="margin-bottom:0;" 
-                data-source="/api/videos" data-trash="false" data-detail="false" data-edit="false">
+                data-source="/api/videos" data-trash="false" data-detail="false">
                 <thead>
                 <tr>
                   <th>編號</th>
                   <th class="no-sort">YouTube</th>
+                  <th class="no-sort">敘述文字</th>
                   <th class="no-sort"></th>
                 </tr>
                 </thead>
