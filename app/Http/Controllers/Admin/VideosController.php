@@ -52,6 +52,7 @@ class VideosController extends Controller
                         }
 
                         $video->title = $playlistItem['snippet']['title'];
+                        $video->description = $playlistItem['snippet']['description'];
                         $video->thumbnailUrl = $playlistItem['snippet']['thumbnails']['high']['url'];
 
                         $video->save();
