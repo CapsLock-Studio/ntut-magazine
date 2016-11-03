@@ -1,12 +1,24 @@
-<form class="form validate-form" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="/admin/videos">
+<form class="form validate-form" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="/admin/videos{{ $video->id ? "/{$video->id}" : '' }}">
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  @if ($video->id)
+    <input type="hidden" name="_method" value="PUT">
+  @endif
   <div class="box">
     <div class="box-body">
       <div class="row">
         <div class="col-sm-4 col-xs-12">
           <div class="image-preview-box">
+            @if ($video->id) 
+              <a href="https://www.youtube.com/watch?v={{ $video->youtubeId }}" target="_blank">
+            @endif
             <img src="{{ $video->thumbnailUrl ?: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=Image&w=400&h=400' }}" class="img-responsive" style="width: 100%;" />
-            <input title="選擇影片" class="btn btn-default btn-block" type="file" name="video" />
+            @if ($video->id) 
+              </a>
+              <span class="label label-info">點擊影片縮圖前往 YouTube 編輯影片</span>
+            @endif
+            @if (!$video->id) 
+              <input title="選擇影片" class="btn btn-default btn-block" type="file" name="video" />
+            @endif
           </div>
         </div>
         <div class="col-sm-6 col-xs-12">
@@ -43,5 +55,7 @@
     </div>
   </div>
 </form>
+
+<div id="flash-message" data-status="{{ $flashStatus }}">{{ $flashMessage }}</div>
 
 @include('admin.videos.authRequestModal')
