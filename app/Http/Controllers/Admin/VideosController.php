@@ -106,7 +106,48 @@ class VideosController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $token = $request->session()->get('token');
+        $video = Video::find($id);
+        $categories = [];
 
+        if (empty($video)) {
+            $request->session()->flash('flashMessage', '不存在的影片');
+            $request->session()->flash('flashStatus', 'warning');
+
+        } else if (empty($token)) {
+            $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+            $request->session()->flash('flashStatus', 'danger');
+
+            $request->session()->set('token', null);
+
+        } else {
+            try {
+                $client = Google::getClient();
+                $client->setAccessToken($token);
+
+                $youtube = new \Google_Service_YouTube($client);
+
+                $videoResponse = $youtube->videos->listVideos('snippet', [ 'id' => $video->youtubeId ]);
+                $video->categoryId = $videoResponse['items'][0]['snippet']['categoryId'];
+
+                $categoriesResponse = $youtube->videoCategories->listVideoCategories('snippet', [ 'hl' => 'zh-TW', 'regionCode' => 'TW' ]);
+
+                $categories = array_map(function($category) {
+                    return [ 'categoryId' => $category['id'], 'categoryName' => $category['snippet']['title'] ];
+                }, $categoriesResponse['items']);
+
+            } catch (\Google_Service_Exception $e) {
+                $request->session()->set('token', null);
+            } catch (\Google_Exception $e) {
+                $request->session()->set('token', null);
+            }
+        }
+
+        view()->share('video', $video);
+        view()->share('categories', $categories);
+
+        view()->share('flashMessage', $request->session()->get('flashMessage'));
+        view()->share('flashStatus', $request->session()->get('flashStatus'));
     }
 
     public function store(Request $request)
