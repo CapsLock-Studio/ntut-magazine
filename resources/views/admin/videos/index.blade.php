@@ -5,9 +5,9 @@
       <div class="box bordered-box sea-blue-border" style="margin-bottom:0;">
         <div class="box-header">
           <div class="title">
-            <label>期刊列表</label>
+            <label>影片列表</label>
             <div class="pull-right btn-toolbar">
-              <a class="btn btn-default" href="/admin/magazines/create">
+              <a class="btn btn-default" href="/admin/videos/create">
                 新增
               </a>
             </div>
@@ -21,12 +21,12 @@
           <div class="responsive-table">
             <div class="scrollable-table sortable-container">
               <table class="table table-bordered table-striped data-table" style="margin-bottom:0;" 
-                data-source="/api/magazines" data-trash="false" data-detail="false">
+                data-source="/api/videos" data-trash="false" data-detail="false">
                 <thead>
                 <tr>
                   <th>編號</th>
-                  <th class="no-sort">圖片</th>
-                  <th class="no-sort">文字</th>
+                  <th class="no-sort">YouTube</th>
+                  <th class="no-sort">敘述文字</th>
                   <th class="no-sort"></th>
                 </tr>
                 </thead>
@@ -41,4 +41,5 @@
     </div>
   </div>
   <div id="flash-message" data-status="{{ $flashStatus }}">{{ $flashMessage }}</div>
+  @include('admin.videos.authRequestModal')
 @endsection

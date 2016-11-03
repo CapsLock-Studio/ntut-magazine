@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
+        PulkitJalan\Google\GoogleServiceProvider::class,
         //
 
         /*
@@ -225,7 +226,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
     ],
 
 ];

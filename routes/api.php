@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 
 use App\Magazine;
+use App\Video;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,32 @@ Route::get('/magazines', function (Request $request) {
         'recordsFiltered' => Magazine::count(),
         'data' => $magazines->map(function($magazine) {
             return [$magazine->id, "<img src=\"{$magazine->image->url('thumb')}\" style=\"width: 200px;\" />", $magazine->title, ['target' => "/admin/magazines/{$magazine->id}"]];
+        })
+    ];
+});
+
+Route::get('/videos', function (Request $request) {
+    $videos = Video::orderBy('id', strtoupper($request->order[0]['dir']));
+
+    if (!empty($request->search['value'])) {
+        $videos = $videos->where('title', 'LIKE', "%{$request->search['value']}%");
+    }
+
+    $videos = $videos
+        ->offset($request->start)
+        ->limit($request->length)
+        ->get();
+
+    return [
+        'recordsTotal' => Magazine::count(),
+        'recordsFiltered' => Magazine::count(),
+        'data' => $videos->map(function($video) {
+            return [
+                $video->id, 
+                "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v={$video->youtubeId}\"><div>{$video->youtubeId} - {$video->title}</div><img src=\"{$video->thumbnailUrl}\" style=\"width: 200px;\" /></a>", 
+                mb_strimwidth($video->description, 0, 60, "..."),
+                ['target' => "/admin/videos/{$video->id}"]
+            ];
         })
     ];
 });

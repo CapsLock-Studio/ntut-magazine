@@ -42,3 +42,10 @@ Route::group([
     Route::resource('users', 'UsersController');
     Route::resource('system', 'SystemController');
 });
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('/auth/google', 'Auth\GoogleController@redirect');
+Route::get('/auth/google/callback', 'Auth\GoogleController@callback');
+
+Auth::routes();
