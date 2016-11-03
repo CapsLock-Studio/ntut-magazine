@@ -227,7 +227,53 @@ class VideosController extends Controller
 
     public function update(Request $request, $id)
     {
+        $token = $request->session()->get('token');
+        $video = Video::find($id);
 
+        if (empty($video)) {
+            $request->session()->flash('flashMessage', '不存在的影片');
+            $request->session()->flash('flashStatus', 'warning');
+
+        } else if (empty($token)) {
+            $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+            $request->session()->flash('flashStatus', 'danger');
+
+        } else {
+            $client = Google::getClient();
+            $client->setAccessToken($token);
+
+            try {
+                $youtube = new \Google_Service_YouTube($client);
+
+                $snippet = new \Google_Service_YouTube_VideoSnippet();
+                $snippet->setTitle($request->title);
+                $snippet->setDescription($request->description);
+                $snippet->setCategoryId($request->categoryId);
+
+                $youTubeVideo = new \Google_Service_YouTube_Video();
+                $youTubeVideo->setId($video->youtubeId);
+                $youTubeVideo->setSnippet($snippet);
+
+                $youtube->videos->update('snippet', $youTubeVideo);
+
+                $request->session()->flash('flashMessage', "影片 {$video->youtubeId} - {$video->title} 已從 YouTube 更新成功。");
+                $request->session()->flash('flashStatus', 'success');
+
+            } catch (\Google_Service_Exception $e) {
+                $request->session()->set('token', null);
+
+                $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+                $request->session()->flash('flashStatus', 'danger');
+
+            } catch (\Google_Exception $e) {
+                $request->session()->set('token', null);
+
+                $request->session()->flash('flashMessage', 'Google 授權失敗，請重新授權。');
+                $request->session()->flash('flashStatus', 'danger');
+            }
+        }
+
+        return redirect()->action('Admin\VideosController@index');
     }
 
     public function destroy(Request $request, $id)
