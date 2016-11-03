@@ -54,7 +54,12 @@ Route::get('/videos', function (Request $request) {
         'recordsTotal' => Magazine::count(),
         'recordsFiltered' => Magazine::count(),
         'data' => $videos->map(function($video) {
-            return [$video->id, "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v={$video->youtubeId}\"><div>{$video->title} - {$video->youtubeId}</div><img src=\"{$video->thumbnailUrl}\" style=\"width: 200px;\" /></a>", ['target' => "/admin/videos/{$video->id}"]];
+            return [
+                $video->id, 
+                "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v={$video->youtubeId}\"><div>{$video->youtubeId} - {$video->title}</div><img src=\"{$video->thumbnailUrl}\" style=\"width: 200px;\" /></a>", 
+                mb_strimwidth($video->description, 0, 60, "..."),
+                ['target' => "/admin/videos/{$video->id}"]
+            ];
         })
     ];
 });
