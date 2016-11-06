@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Magazine;
 use App\Video;
@@ -33,7 +34,13 @@ Route::get('/magazines', function (Request $request) {
         'recordsTotal' => Magazine::count(),
         'recordsFiltered' => Magazine::count(),
         'data' => $magazines->map(function($magazine) {
-            return [$magazine->id, "<img src=\"{$magazine->image->url('thumb')}\" style=\"width: 200px;\" />", $magazine->title, ['target' => "/admin/magazines/{$magazine->id}"]];
+            return [
+                $magazine->id,
+                "<img src=\"{$magazine->image->url('thumb')}\" style=\"width: 200px;\" />",
+                $magazine->title,
+                "<a href=\"{$magazine->attachUrl}\" class=\"btn btn-link " . ($magazine->attachUrl == '' ? 'disabled' : '') . "\">點擊下載</a>",
+                ['target' => "/admin/magazines/{$magazine->id}"]
+            ];
         })
     ];
 });

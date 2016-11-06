@@ -25,8 +25,9 @@
                 <thead>
                 <tr>
                   <th>編號</th>
-                  <th class="no-sort">圖片</th>
-                  <th class="no-sort">文字</th>
+                  <th class="no-sort">封面</th>
+                  <th class="no-sort">敘述文字</th>
+                  <th class="no-sort">檔案</th>
                   <th class="no-sort"></th>
                 </tr>
                 </thead>
