@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 use App\Http\Requests;
 
@@ -28,12 +30,20 @@ class MagazinesController extends Controller
 
     public function store(Request $request)
     {
-        $magazine = Magazine::create($request->except('_token'));
+        $magazine = new Magazine($request->except('_token'));
 
-        if ($magazine) {
+        if ($magazine->save()) {
             $request->session()->flash('flashMessage', "編號 {$magazine->id} 新增成功。");
             $request->session()->flash('flashStatus', 'success');
         } else {
+            $request->session()->flash('flashMessage', "新增失敗，請洽系統管理員協詢處理。");
+            $request->session()->flash('flashStatus', 'warning');
+        }
+
+        try {
+            $magazine->attach = $request->file('attach')->store('public/attaches');
+            $magazine->save();
+        } catch (Exception $exception) {
             $request->session()->flash('flashMessage', "新增失敗，請洽系統管理員協詢處理。");
             $request->session()->flash('flashStatus', 'warning');
         }
@@ -43,12 +53,26 @@ class MagazinesController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (Magazine::find($id)->update($request->except('_token'))) {
+        $magazine = Magazine::find($id);
+
+        if ($magazine->update($request->except('_token'))) {
             $request->session()->flash('flashMessage', "編號 {$id} 修改成功。");
             $request->session()->flash('flashStatus', 'success');
         } else {
-            $request->session()->flash('flashMessage', '改失敗，請洽系統管理員協詢處理。');
+            $request->session()->flash('flashMessage', '修改失敗，請洽系統管理員協詢處理。');
             $request->session()->flash('flashStatus', 'warning');
+        }
+
+        if (!empty($request->file('attach'))) {
+            try {
+                Storage::delete($magazine->attach);
+
+                $magazine->attach = $request->file('attach')->store('public/attaches');
+                $magazine->save();
+            } catch (Exception $exception) {
+                $request->session()->flash('flashMessage', '改失敗，請洽系統管理員協詢處理。');
+                $request->session()->flash('flashStatus', 'warning');
+            }
         }
 
         return redirect()->action('Admin\MagazinesController@index');
@@ -56,7 +80,11 @@ class MagazinesController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        if (Magazine::destroy($id)) {
+        $magazine = Magazine::find($id);
+
+        Storage::delete($magazine->attach);
+
+        if ($magazine->delete()) {
             $request->session()->flash('flashMessage', "編號 {$id} 刪除成功。");
             $request->session()->flash('flashStatus', 'success');
         } else {
