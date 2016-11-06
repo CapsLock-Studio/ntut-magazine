@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 
+use Illuminate\Support\Facades\Storage;
+
 class Magazine extends Model implements StaplerableInterface {
 
     use EloquentTrait;
@@ -24,5 +26,10 @@ class Magazine extends Model implements StaplerableInterface {
         ]);
 
         parent::__construct($attributes);
+    }
+
+    public function getAttachUrlAttribute($value) {
+        return Storage::has($this->attach) ? Storage::url($this->attach) : '';
+        // return "{$fileName}.{$fileExtension}";
     }
 }
