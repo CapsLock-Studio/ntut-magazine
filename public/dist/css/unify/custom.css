@@ -1,0 +1,8 @@
+/* Add here all your css styles (customizations) */
+.header .logo {
+  padding: 8px 0;
+}
+
+.header .logo .large {
+  font-size: 36px;
+}
