@@ -14,10 +14,27 @@
         </div>
         <div class="col-sm-6 col-xs-12">
           <div class="form-group">
-            <label>敘述文字</label>
+            <label>年份</label>
+            <div class="controls">
+              <select class="form-control" data-rule-required="true" name="year">
+                @foreach (range(date('Y'), 2000) as $year)
+                  <option {{ $magazine->year == $year ? 'selected="selected"' : '' }}>{{ $year }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>期數</label>
             <small><span class="label label-success">可留空</span></small>
             <div class="controls">
-              <input class="form-control" placeholder="請輸入敘述" name="title" value="{{ $magazine->title }}" />
+              <input class="form-control" placeholder="請輸入期數" name="period" value="{{ $magazine->period }}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>標題文字</label>
+            <small><span class="label label-success">可留空</span></small>
+            <div class="controls">
+              <input class="form-control" placeholder="請輸入標題" name="title" value="{{ $magazine->title }}" />
             </div>
           </div>
           <div class="form-group">
