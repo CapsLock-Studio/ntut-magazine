@@ -29,17 +29,20 @@
   <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
     <div class="container">
       <ul class="nav navbar-nav">
-        <li class="active">
-          <a>首頁</a>
+        <li class="{{ @$controller_home }}">
+          <a href="/">首頁</a>
         </li>
-        <li>
-          <a>校訓期刊發佈</a>
+        <li class="{{ @$controller_news }}">
+          <a href="/magazines">消息發佈</a>
         </li>
-        <li>
-          <a>影片瀏覽</a>
+        <li class="{{ @$controller_magazines }}">
+          <a href="/magazines">校訓期刊發佈</a>
         </li>
-        <li>
-          <a>電子期刊</a>
+        <li class="{{ @$controller_videos }}">
+          <a href="/videos">影片瀏覽</a>
+        </li>
+        <li class="{{ @$controller_ebook }}">
+          <a href="/ebook">電子期刊</a>
         </li>
       </ul>
     </div>
