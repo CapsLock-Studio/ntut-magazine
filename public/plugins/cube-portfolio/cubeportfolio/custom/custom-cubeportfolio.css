@@ -61,9 +61,17 @@
 	text-transform: uppercase;
 }
 
+.cube-portfolio .cbp-l-filters-text .cbp-filter-item a {
+	color: #555;
+}
+
+.cube-portfolio .cbp-l-filters-text .cbp-filter-item a:hover {
+	text-decoration: none;
+}
+
 .cube-portfolio .cbp-l-filters-text .cbp-filter-item.cbp-filter-item-active,
 .cube-portfolio .cbp-l-filters-text .cbp-filter-item:hover {
-	color: #72c02c;
+	border-bottom: 2px solid;
 }
 
 .cube-portfolio .cbp-l-filters-text .cbp-filter-counter {
@@ -130,8 +138,6 @@
 
 .cube-portfolio .link-captions li i {
 	color: #444;
-	width: 30px;
-	height: 30px;
 	padding: 8px;
 	font-style: 14px;
 	background: #fff;
