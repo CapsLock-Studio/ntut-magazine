@@ -23,12 +23,18 @@
             </div>
           </div>
           <div class="form-group">
-            <label>敘述文字</label>
+            <label>標題文字</label>
             <small><span class="label label-success">可留空</span></small>
             <div class="controls">
               <input class="form-control" placeholder="請輸入敘述" name="title" value="{{ $carousel->title }}" />
             </div>
-            <span class="label label-primary">當輪播圖片上有敘述文字時請輸入相同文字於此, 以利網站搜尋優化</span>
+          </div>
+          <div class="form-group">
+            <label>副標題文字</label>
+            <small><span class="label label-success">可留空</span></small>
+            <div class="controls">
+              <input class="form-control" placeholder="請輸入敘述" name="subtitle" value="{{ $carousel->subtitle }}" />
+            </div>
           </div>
         </div>
       </div>

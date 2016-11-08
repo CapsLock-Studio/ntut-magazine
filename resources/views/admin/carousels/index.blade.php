@@ -54,7 +54,8 @@
                           </div>
                         </td>
                         <td>
-                          {{ $carousel->title }}
+                          <h3>{{ $carousel->title }}</h3>
+                          <p>{{ $carousel->subtitle }}</p>
                         </td>
                         <td>
                           <a class="btn btn-default" href="{{ $carousel->url }}" target="_blank">

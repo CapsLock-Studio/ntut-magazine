@@ -38,6 +38,8 @@ Route::get('/magazines', function (Request $request) {
                 $magazine->id,
                 "<img src=\"{$magazine->image->url('thumb')}\" style=\"width: 200px;\" />",
                 $magazine->title,
+                $magazine->year,
+                $magazine->period,
                 "<a href=\"{$magazine->attachUrl}\" class=\"btn btn-link " . ($magazine->attachUrl == '' ? 'disabled' : '') . "\">點擊下載</a>",
                 ['target' => "/admin/magazines/{$magazine->id}"]
             ];
