@@ -35,7 +35,5 @@ class HomeController extends Controller
                                            ->orderBy('period', 'desc')
                                            ->get());
         view()->share('years', $years);
-
-        return view('home.index');
     }
 }

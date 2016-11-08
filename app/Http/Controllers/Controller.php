@@ -19,6 +19,15 @@ class Controller extends BaseController
 
     public function __destruct()
     {
-        
+        $route = Route::current();
+        $routeFragments = explode('\\', explode('@', $route->getAction()['controller'])[0]);
+
+        $controllerName = preg_replace('/controller$/', '', strtolower(end($routeFragments)));
+        $actionName = explode('.', $route->getName());
+        $actionName = end($actionName);
+
+        view()->share("controller_{$controllerName}", "active");
+
+        echo view("${controllerName}.${actionName}");
     }
 }
