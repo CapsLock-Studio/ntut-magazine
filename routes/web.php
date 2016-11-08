@@ -12,6 +12,7 @@
 */
 
 Route::resource('/', 'HomeController');
+Route::resource('magazines', 'MagazinesController');
 Route::resource('ebook', 'EbookController');
 
 Route::auth();
