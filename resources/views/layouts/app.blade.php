@@ -38,6 +38,10 @@
 
   <!-- CSS Customization -->
   <link rel="stylesheet" href="dist/css/unify/custom.css">
+
+  <!-- JS Global Compulsory -->
+  <script type="text/javascript" src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <script type="text/javascript" src="plugins/jQuery/jquery-migrate.min.js"></script>
 </head>
 
 <body class="header-fixed">
@@ -54,8 +58,6 @@
   </div><!--/wrapper-->
 
   <!-- JS Global Compulsory -->
-  <script type="text/javascript" src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="plugins/jQuery/jquery-migrate.min.js"></script>
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
   <!-- JS Implementing Plugins -->
   <script type="text/javascript" src="plugins/back-to-top.js"></script>
