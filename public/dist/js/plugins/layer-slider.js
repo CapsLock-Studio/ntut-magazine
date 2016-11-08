@@ -10,7 +10,7 @@ var LayerSlider = function () {
 			        responsive : true,
 			        responsiveUnder : 960,
 			        layersContainer : 960,
-			        skinsPath: 'assets/plugins/layer-slider/layerslider/skins/'
+			        skinsPath: 'plugins/layer-slider/layerslider/skins/'
 			    });
 		    });     
         }
