@@ -13,7 +13,7 @@ class Magazine extends Model implements StaplerableInterface {
 
     use EloquentTrait;
 
-    protected $fillable = ['image', 'title'];
+    protected $fillable = ['image', 'title', 'period', 'year'];
 
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('image', [

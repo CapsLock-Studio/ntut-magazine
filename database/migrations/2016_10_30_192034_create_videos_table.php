@@ -18,6 +18,8 @@ class CreateVideosTable extends Migration
             $table->string('youtubeId')->unique();
             $table->string('thumbnailUrl')->nullable();
             $table->string('title')->nullable();
+            $table->integer('year')->nullable();
+            $table->string('period')->nullable();
             $table->timestamps();
         });
     }
