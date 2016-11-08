@@ -43,14 +43,8 @@
 <body class="header-fixed">
   <div class="wrapper">
     <!--=== Header ===-->
-    <div class="header">
-      @include('layouts.header')
-    </div>
+    @include('layouts.header')
     <!--=== End Header ===-->
-
-    <!--=== Breadcrumbs v3 ===-->
-    @include('layouts.breadcrumbs')
-    <!--=== End Breadcrumbs v3 ===-->
 
     @yield('content')
 
@@ -65,7 +59,6 @@
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
   <!-- JS Implementing Plugins -->
   <script type="text/javascript" src="plugins/back-to-top.js"></script>
-  <script type="text/javascript" src="plugins/smoothScroll.js"></script>
   <script type="text/javascript" src="plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
   <!-- JS Customization -->
   <script type="text/javascript" src="dist/js/custom.js"></script>
