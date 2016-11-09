@@ -237,6 +237,18 @@ var App = function () {
 		jQuery('.popovers-destroy').popover('destroy');
 	}
 
+	function handleMagnificPopup() {
+		jQuery('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+      disableOn: 700,
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
+
+      fixedContentPos: false
+    });
+	}
+
 	return {
 		init: function () {
 			handleBootstrap();
@@ -253,6 +265,7 @@ var App = function () {
 			handleValignMiddle();
 			handleEqualHeightColumns();
 			handleEqualHeightColumns__Images();
+			handleMagnificPopup();
 		},
 
 		// Counters
