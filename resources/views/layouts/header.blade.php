@@ -38,8 +38,15 @@
         <li class="{{ @$controller_magazines }}">
           <a href="/magazines">校訓期刊</a>
         </li>
-        <li class="{{ @$controller_videos }}">
-          <a href="/videos">影片瀏覽</a>
+        <!-- Videos -->
+        <li class="dropdown {{ @$controller_videos }}">
+          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+            影片瀏覽
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="/videos">YouTube 頻道</a></li>
+            <li><a href="/videos/vCollect">北科 V 集合</a></li>
+          </ul>
         </li>
         <li class="{{ @$controller_ebook }}">
           <a href="/ebook">電子期刊</a>

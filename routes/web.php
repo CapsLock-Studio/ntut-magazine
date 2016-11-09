@@ -13,6 +13,9 @@
 
 Route::resource('/', 'HomeController');
 Route::resource('magazines', 'MagazinesController');
+
+Route::get('videos/vCollect', 'VideosController@vCollect');
+Route::resource('videos', 'VideosController');
 Route::resource('ebook', 'EbookController');
 
 Route::auth();
