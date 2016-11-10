@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Magazine;
 use App\Video;
+use App\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,35 @@ use App\Video;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/news', function (Request $request) {
+
+    $new = News::orderBy('id', strtoupper($request->order[0]['dir']));
+
+    if (!empty($request->search['value'])) {
+        $new = $new->where('title', 'LIKE', "%{$request->search['value']}%")
+                   ->orWhere('content', 'LIKE', "%{$request->search['value']}%");
+    }
+
+    $new = $new
+        ->offset($request->start)
+        ->limit($request->length)
+        ->get();
+
+    return [
+        'recordsTotal' => Magazine::count(),
+        'recordsFiltered' => Magazine::count(),
+        'data' => $new->map(function($eachNews) {
+            return [
+                $eachNews->id,
+                $eachNews->title,
+                mb_strimwidth(strip_tags($eachNews->content), 0, 60, "..."),
+                $eachNews->publishedAt,
+                ['target' => "/admin/news/{$eachNews->id}"]
+            ];
+        })
+    ];
+});
 
 Route::get('/magazines', function (Request $request) {
 
