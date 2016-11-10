@@ -42,6 +42,7 @@ Route::group([
 
     Route::put('carousels/order', 'CarouselsController@order');
     Route::resource('carousels', 'CarouselsController');
+    Route::resource('news', 'NewsController');
     Route::resource('magazines', 'MagazinesController');
     Route::resource('videos', 'VideosController');
     Route::resource('users', 'UsersController');

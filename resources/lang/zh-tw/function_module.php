@@ -15,6 +15,7 @@ return [
 
     'dashboard' => '儀表板',
     'carousels' => '輪播管理',
+    'news' => '訊息發佈管理',
     'magazines' => '校訓期刊管理',
     'videos' => '影片管理',
     'users' => '使用者管理',
