@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-TW',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,9 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
+        PulkitJalan\Google\GoogleServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
         //
 
         /*
@@ -226,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ],
 
 ];

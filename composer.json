@@ -1,12 +1,16 @@
 {
-    "name": "laravel/laravel",
+    "name": "ntut-magazine",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "license": "BSD-3",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "laravel/framework": "5.3.*",
+        "codesleeve/laravel-stapler": "1.0.*",
+        "pulkitjalan/google-apiclient": "3.*",
+        "doctrine/dbal": "^2.5",
+        "mews/purifier": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
