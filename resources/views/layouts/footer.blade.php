@@ -12,6 +12,8 @@
           <address class="md-margin-bottom-40">
             10608 台北市忠孝東路三段一號  Tel: (886-2) 2771-2171
           </address>
+
+          <a href="/admin">管理後台登入</a>
         </div>
       </div>
     </div>
