@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
 
   <!-- CSS Theme -->
-  <link rel="stylesheet" href="/dist/css/unify/theme-colors/default.css" id="style_color">
+  <link rel="stylesheet" href="/dist/css/unify/theme-colors/dark-blue.css" id="style_color">
   <link rel="stylesheet" href="/dist/css/unify/theme-skins/dark.css">
 
   <!-- CSS Customization -->
