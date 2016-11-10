@@ -8,12 +8,27 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
+            <label>封面照片</label>
+            <div class="image-preview-box" style="width: 300px;">
+              <img src="{{ $news->cover->url('medium') }}" class="img-responsive" style="width: 100%;" />
+              <input title="選擇圖片" class="btn btn-default btn-block fit-placeholder-size" type="file" name="cover" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="showCover" {{ $news->showCover ? 'checked="checked"' : '' }}>
+                顯示封面於內頁
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
             <label>發佈時間</label>
             <div class="input-group date">
               <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </div>
-              <input type="text" class="form-control pull-right" id="datepicker" name="publishedAt" value="{{ $news->publishedAt ?: date("Y-m-d") }}">
+              <input type="text" class="form-control pull-right" id="datepicker" name="publishedAt" value="{{ $news->publishedAt->format('Y-m-d') ?: date("Y-m-d") }}">
             </div>
             <!-- /.input group -->
           </div>
