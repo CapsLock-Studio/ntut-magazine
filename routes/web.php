@@ -12,6 +12,7 @@
 */
 
 Route::resource('/', 'HomeController');
+Route::resouece('news', 'NewsController');
 Route::resource('magazines', 'MagazinesController');
 
 Route::get('videos/vCollect', 'VideosController@vCollect');
