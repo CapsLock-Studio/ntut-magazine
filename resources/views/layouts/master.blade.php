@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
   <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/dist/css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="/plugins/iCheck/all.css"></script>
@@ -58,6 +59,12 @@
           <a href="/admin/carousels">
             <i class="fa fa-exchange"></i>
             <span>輪播管理</span>
+          </a>
+        </li>
+        <li class="{{ @$controller_news }}">
+          <a href="/admin/news">
+            <i class="fa fa-paper-plane-o"></i>
+            <span>訊息發佈管理</span>
           </a>
         </li>
         <li class="{{ @$controller_magazines }}">
@@ -126,6 +133,7 @@
 <script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script src="/plugins/fileinput/bootstrap-fileinput.js"></script>
+<script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="/plugins/input-mask/jquery.inputmask.regex.extensions.js"></script>
 <script src="/plugins/validate/jquery.validate.min.js"></script>
