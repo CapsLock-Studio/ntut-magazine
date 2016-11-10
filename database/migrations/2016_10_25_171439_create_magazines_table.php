@@ -16,6 +16,8 @@ class CreateMagazinesTable extends Migration
         Schema::create('magazines', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable();
+            $table->integer('year')->nullable();
+            $table->string('period')->nullable();
             $table->string('image_file_name')->nullable();
             $table->integer('image_file_size')->nullable()->after('image_file_name');
             $table->string('image_content_type')->nullable()->after('image_file_size');
