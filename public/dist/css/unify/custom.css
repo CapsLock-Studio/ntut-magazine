@@ -49,6 +49,10 @@
   color: #9e1317;
 }
 
+.pagination>li>a, .pagination>li>span {
+  padding: 5px 15px;
+}
+
 .carousel,
 .carousel-inner {
   height: 100%;

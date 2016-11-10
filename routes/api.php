@@ -40,7 +40,7 @@ Route::get('/news', function (Request $request) {
                 $eachNews->id,
                 $eachNews->title,
                 mb_strimwidth(strip_tags($eachNews->content), 0, 60, "..."),
-                $eachNews->publishedAt,
+                $eachNews->publishedAt->format('Y-m-d'),
                 ['target' => "/admin/news/{$eachNews->id}"]
             ];
         })

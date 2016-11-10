@@ -1,0 +1,28 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines contain the default error messages used by
+    | the validator class. Some of these rules have multiple versions such
+    | as the size rules. Feel free to tweak each of these messages here.
+    |
+    */
+
+    'January' => '一月',
+    'February' => '二月',
+    'March' => '三月',
+    'April' => '四月',
+    'May' => '五月',
+    'June' => '六月',
+    'July' => '七月',
+    'August' => '八月',
+    'September' => '九月',
+    'Octocer' => '十月',
+    'November' => '十一月',
+    'December' => '十二月',
+];
