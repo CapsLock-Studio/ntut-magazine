@@ -57,7 +57,14 @@
                 <li><a href="{{ $magazine->image->url('original') }}" class="cbp-lightbox" data-title="{{ $magazine->title }}"><i class="rounded-x fa fa-2x fa-search"></i></a></li>
               </ul>
               <div class="cbp-l-grid-agency-title">{{ $magazine->title }}</div>
-              <div class="cbp-l-grid-agency-desc">第 {{ $magazine->period }} 期</div>
+              <div class="cbp-l-grid-agency-desc">
+                第 {{ $magazine->period }} 期
+
+                @if (preg_match("/.pdf$/i", $magazine->attachUrl))
+                  <br/><br/>
+                  <a class="btn btn-default" href="/magazines/{{$magazine->id}}">線上觀看</a>
+                @endif
+              </div>
             </div>
           </div>
         </div>

@@ -7,3 +7,5 @@ Homestead.json
 dump.rdb
 /tmp
 /public/system/*
+pdf.js
+pdf.worker.js
