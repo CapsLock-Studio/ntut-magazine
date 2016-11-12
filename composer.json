@@ -10,7 +10,8 @@
         "codesleeve/laravel-stapler": "1.0.*",
         "pulkitjalan/google-apiclient": "3.*",
         "doctrine/dbal": "^2.5",
-        "mews/purifier": "^2.0"
+        "mews/purifier": "^2.0",
+        "spatie/pdf-to-image": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
