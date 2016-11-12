@@ -9,7 +9,9 @@
   </div>
 
   <div class="row">
-    <canvas id="the-canvas" class="col-md-8 col-md-offset-2 col-sm-12" style="border:1px solid rgba(0,0,0,.04)!important;box-shadow:0 1px 7px rgba(0,0,0,.05);"></canvas>
+    <div class="col-md-8 col-md-offset-2 col-sm-12">
+      <canvas id="the-canvas" style="border:1px solid rgba(0,0,0,.04)!important;box-shadow:0 1px 7px rgba(0,0,0,.05);width: 100%;height: 100%;"></canvas>
+    </div>
   </div>
 </div>
 <script type="text/javascript" src="/plugins/mozilla/pdf.js"></script>
@@ -57,9 +59,10 @@
     pageRendering = true;
     // Using promise to fetch the page
     pdfDoc.getPage(num).then(function(page) {
-      var viewport = page.getViewport(canvas.width / page.getViewport(1.0).width);
+      var viewport = page.getViewport(2);
 
       canvas.height = viewport.height;
+      canvas.width = viewport.width;
 
       // Render PDF page into canvas context
       var renderContext = {
