@@ -2,8 +2,8 @@
 @section('content')
 <div class="container content-md text-center">
   <div class="margin-bottom-20">
-    <button class="btn btn-default" id="prev">Previous</button>
-    <button class="btn btn-default" id="next">Next</button>
+    <button class="btn btn-default" id="prev">上一頁</button>
+    <button class="btn btn-default" id="next">下一頁</button>
     &nbsp; &nbsp;
     <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
   </div>
