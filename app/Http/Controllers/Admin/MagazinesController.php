@@ -41,8 +41,22 @@ class MagazinesController extends Controller
         }
 
         try {
-            $magazine->attach = $request->file('attach')->store('public/attaches');
+            $uploadFile = $request->file('attach');
+            $magazine->attach = $uploadFile->store('public/attaches');
             $magazine->save();
+
+            if (!empty($request->get('isSetPdfFirstPageToCover')) && $uploadFile->getMimeType() == 'application/pdf') {
+                $attachPath = base_path("storage/app/{$magazine->attach}");
+
+                $pdfFirstPageImagePath = base_path("storage/app/{$magazine->attach}.png");
+
+                $pdf = new \Spatie\PdfToImage\Pdf($attachPath);
+                $pdf->setPage(1)
+                    ->saveImage($pdfFirstPageImagePath);
+
+                $magazine->image = $pdfFirstPageImagePath;
+                $magazine->save();
+            }
         } catch (Exception $exception) {
             $request->session()->flash('flashMessage', "新增失敗，請洽系統管理員協詢處理。");
             $request->session()->flash('flashStatus', 'warning');
@@ -63,12 +77,26 @@ class MagazinesController extends Controller
             $request->session()->flash('flashStatus', 'warning');
         }
 
-        if (!empty($request->file('attach'))) {
+        $uploadFile = $request->file('attach');
+        if (!empty($uploadFile)) {
             try {
                 Storage::delete($magazine->attach);
 
-                $magazine->attach = $request->file('attach')->store('public/attaches');
+                $magazine->attach = $uploadFile->store('public/attaches');
                 $magazine->save();
+
+                if (!empty($request->get('isSetPdfFirstPageToCover')) && $uploadFile->getMimeType() == 'application/pdf') {
+                    $attachPath = base_path("storage/app/{$magazine->attach}");
+
+                    $pdfFirstPageImagePath = base_path("storage/app/{$magazine->attach}.png");
+
+                    $pdf = new \Spatie\PdfToImage\Pdf($attachPath);
+                    $pdf->setPage(1)
+                        ->saveImage($pdfFirstPageImagePath);
+
+                    $magazine->image = $pdfFirstPageImagePath;
+                    $magazine->save();
+                }
             } catch (Exception $exception) {
                 $request->session()->flash('flashMessage', '改失敗，請洽系統管理員協詢處理。');
                 $request->session()->flash('flashStatus', 'warning');
