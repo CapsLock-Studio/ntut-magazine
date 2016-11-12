@@ -44,6 +44,10 @@
               <input title="選擇檔案" class="btn btn-default" type="file" name="attach" />
               <a href="{{ $magazine->attachUrl == '' ? '' : asset($magazine->attachUrl) }}" class="btn btn-link {{ $magazine->attachUrl == '' ? 'disabled' : '' }}">目前附件檔案</a>
             </div>
+            <label>
+                <input type="checkbox" name="isSetPdfFirstPageToCover" checked="checked">
+                上傳附件為 pdf 時，將第一頁設為封面
+              </label>
           </div>
         </div>
       </div>
