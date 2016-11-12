@@ -14,10 +14,27 @@
         </div>
         <div class="col-sm-6 col-xs-12">
           <div class="form-group">
-            <label>敘述文字</label>
+            <label>年份</label>
+            <div class="controls">
+              <select class="form-control" data-rule-required="true" name="year">
+                @foreach (range(date('Y'), 2000) as $year)
+                  <option {{ $magazine->year == $year ? 'selected="selected"' : '' }}>{{ $year }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>期數</label>
             <small><span class="label label-success">可留空</span></small>
             <div class="controls">
-              <input class="form-control" placeholder="請輸入敘述" name="title" value="{{ $magazine->title }}" />
+              <input class="form-control" placeholder="請輸入期數" name="period" value="{{ $magazine->period }}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>標題文字</label>
+            <small><span class="label label-success">可留空</span></small>
+            <div class="controls">
+              <input class="form-control" placeholder="請輸入標題" name="title" value="{{ $magazine->title }}" />
             </div>
           </div>
           <div class="form-group">
@@ -27,6 +44,10 @@
               <input title="選擇檔案" class="btn btn-default" type="file" name="attach" />
               <a href="{{ $magazine->attachUrl == '' ? '' : asset($magazine->attachUrl) }}" class="btn btn-link {{ $magazine->attachUrl == '' ? 'disabled' : '' }}">目前附件檔案</a>
             </div>
+            <label>
+                <input type="checkbox" name="isSetPdfFirstPageToCover" checked="checked">
+                上傳附件為 pdf 時，將第一頁設為封面
+              </label>
           </div>
         </div>
       </div>

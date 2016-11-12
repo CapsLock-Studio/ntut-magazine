@@ -12,6 +12,12 @@
 */
 
 Route::resource('/', 'HomeController');
+Route::resource('news', 'NewsController');
+Route::resource('magazines', 'MagazinesController');
+
+Route::get('videos/vCollect', 'VideosController@vCollect');
+Route::resource('videos', 'VideosController');
+Route::resource('ebook', 'EbookController');
 
 Route::auth();
 
@@ -37,6 +43,7 @@ Route::group([
 
     Route::put('carousels/order', 'CarouselsController@order');
     Route::resource('carousels', 'CarouselsController');
+    Route::resource('news', 'NewsController');
     Route::resource('magazines', 'MagazinesController');
     Route::resource('videos', 'VideosController');
     Route::resource('users', 'UsersController');
