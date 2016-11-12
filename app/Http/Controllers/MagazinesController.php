@@ -34,4 +34,9 @@ class MagazinesController extends Controller
         view()->share('queryYear', $queryYear);
         view()->share('filterYear', $request->filterYear);
     }
+
+    function show(Request $request, $id)
+    {
+        view()->share('magazine', Magazine::find($id));
+    }
 }
