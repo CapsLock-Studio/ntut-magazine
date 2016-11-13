@@ -28,6 +28,12 @@
     padding-bottom: 20px;
 }
 
+.news-v3-in p img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .popup-youtube .news-v1-in .mask {
   position: relative;
 }
