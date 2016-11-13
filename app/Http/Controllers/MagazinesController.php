@@ -22,7 +22,7 @@ class MagazinesController extends Controller
         if ($queryYear) {
             $magazines = Magazine::where('year', '=', $queryYear);
         } else {
-            $magazines = Magazine::where('year', '>=', $earlesitYear);
+            $magazines = Magazine::where('year', '>=', end($years));
         }
 
         view()->share('magazines', $magazines
