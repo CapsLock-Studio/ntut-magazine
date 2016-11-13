@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Magazine;
 use App\Video;
 use App\News;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +116,29 @@ Route::get('/videos', function (Request $request) {
                 "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v={$video->youtubeId}\"><div>{$video->youtubeId} - {$video->title}</div><img src=\"{$video->thumbnailUrl}\" style=\"width: 200px;\" /></a>", 
                 mb_strimwidth($video->description, 0, 60, "..."),
                 ['target' => "/admin/videos/{$video->id}"]
+            ];
+        })
+    ];
+});
+
+Route::get('/users', function (Request $request) {
+    $users = User::orderBy('id', strtoupper($request->order[0]['dir']));
+
+    $users = $users
+        ->offset($request->start)
+        ->limit($request->length)
+        ->get();
+
+    return [
+        'recordsTotal' => User::count(),
+        'recordsFiltered' => User::count(),
+        'data' => $users->map(function($user) {
+            return [
+                $user->id,
+                $user->name,
+                "<a href=\"mailto:{$user->email}\">{$user->email}</a>",
+                $user->active ? '已啟用' : '尚待啟用',
+                ['target' => "/admin/users/{$user->id}"]
             ];
         })
     ];

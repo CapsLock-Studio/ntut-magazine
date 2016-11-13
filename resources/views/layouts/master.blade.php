@@ -37,6 +37,11 @@
       </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <li>
+            <a href="/admin/users/setting">
+              <i class="fa fa-gear"></i>
+            </a>
+          </li>
           <li class="dropdown">
             <a href="/logout">
               <span class="hidden-xs">登出</span>
