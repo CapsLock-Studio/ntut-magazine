@@ -27,8 +27,8 @@
                   <th>編號</th>
                   <th class="no-sort">封面</th>
                   <th class="no-sort">標題文字</th>
-                  <th class="no-sort">年份</th>
-                  <th class="no-sort">期數</th>
+                  <th>年份</th>
+                  <th>期數</th>
                   <th class="no-sort">檔案</th>
                   <th class="no-sort"></th>
                 </tr>
