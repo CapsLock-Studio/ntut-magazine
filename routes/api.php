@@ -20,22 +20,29 @@ use App\News;
 
 Route::get('/news', function (Request $request) {
 
-    $new = News::orderBy('id', strtoupper($request->order[0]['dir']));
+    $news = null;
+
+    if (!empty($request->order[0]['dir'])) {
+        $news = News::orderBy('id', strtoupper($request->order[0]['dir']));
+
+    } else if (!empty($request->order[3]['dir'])) {
+        $news = News::orderBy('publishedAt', strtoupper($request->order[3]['dir']));
+    }
 
     if (!empty($request->search['value'])) {
-        $new = $new->where('title', 'LIKE', "%{$request->search['value']}%")
+        $news = $news->where('title', 'LIKE', "%{$request->search['value']}%")
                    ->orWhere('content', 'LIKE', "%{$request->search['value']}%");
     }
 
-    $new = $new
+    $news = $news
         ->offset($request->start)
         ->limit($request->length)
         ->get();
 
     return [
-        'recordsTotal' => Magazine::count(),
-        'recordsFiltered' => Magazine::count(),
-        'data' => $new->map(function($eachNews) {
+        'recordsTotal' => News::count(),
+        'recordsFiltered' => News::count(),
+        'data' => $news->map(function($eachNews) {
             return [
                 $eachNews->id,
                 $eachNews->title,
@@ -49,7 +56,17 @@ Route::get('/news', function (Request $request) {
 
 Route::get('/magazines', function (Request $request) {
 
-    $magazines = Magazine::orderBy('id', strtoupper($request->order[0]['dir']));
+    $magazines = null;
+
+    if (!empty($request->order[0]['dir'])) {
+        $magazines = Magazine::orderBy('id', strtoupper($request->order[0]['dir']));
+
+    } else if (!empty($request->order[3]['dir'])) {
+        $magazines = Magazine::orderBy('year', strtoupper($request->order[0]['dir']));
+
+    } else if (!empty($request->order[4]['dir'])) {
+        $magazines = Magazine::orderBy('period', strtoupper($request->order[0]['dir']));
+    }
 
     if (!empty($request->search['value'])) {
         $magazines = $magazines->where('title', 'LIKE', "%{$request->search['value']}%");
@@ -90,8 +107,8 @@ Route::get('/videos', function (Request $request) {
         ->get();
 
     return [
-        'recordsTotal' => Magazine::count(),
-        'recordsFiltered' => Magazine::count(),
+        'recordsTotal' => Video::count(),
+        'recordsFiltered' => Video::count(),
         'data' => $videos->map(function($video) {
             return [
                 $video->id, 
