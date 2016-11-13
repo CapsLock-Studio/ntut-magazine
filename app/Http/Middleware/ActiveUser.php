@@ -20,7 +20,7 @@ class ActiveUser
         if ($contorller != 'App\Http\Controllers\Admin\UsersController' || ($action != 'setting' && $action != 'updateSetting')) {
         	$user = Auth::user();
 			
-			if (!$user->active) {
+			if (!empty($user) && !$user->active) {
 				$request->session()->flash('flashMessage', '帳戶尚未通過認證，請修改系統預設密碼啟用帳戶');
             	$request->session()->flash('flashStatus', 'warning');
 
