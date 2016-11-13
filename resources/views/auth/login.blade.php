@@ -60,7 +60,7 @@
         </div>
       </form>
       <a href="/password/reset">忘記密碼</a><br>
-      <a href="/register" class="text-center">註冊帳號</a>
+      <!-- <a href="/register" class="text-center">註冊帳號</a> -->
     </div>
   </div>
   <script src="/plugins/jQuery/jQuery-2.2.3.min.js"></script>

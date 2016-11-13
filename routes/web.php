@@ -23,24 +23,10 @@ Route::resource('ebook', 'EbookController');
 
 Route::auth();
 
-/**
- * 禁止註冊
- */
-// 如果走頁面的點擊註冊就導到登入頁面
-Route::get("register", function() {
-    return redirect("login");
-});
-
-// 如果走POST註冊就不理他
-Route::post("register", function() {
-    return;
-});
-
 Route::group([
     'prefix' => 'admin',
-    'namespace' => 'Admin', 
-    'middleware' => 'auth',
-    'middleware' => ActiveUser::class,
+    'namespace' => 'Admin',
+    'middleware' => [ ActiveUser::class, 'auth' ],
 ], function() {
     Route::resource('/', 'CarouselsController');
 
