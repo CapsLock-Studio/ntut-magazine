@@ -84,12 +84,12 @@
             <span>使用者管理</span>
           </a>
         </li>
-        <li class="{{ @$controller_system }}">
+        <!-- <li class="{{ @$controller_system }}">
           <a href="/admin/system">
             <i class="fa fa-power-off"></i>
             <span>系統管理</span>
           </a>
-        </li>
+        </li> -->
       </ul>
     </section>
   </aside>
