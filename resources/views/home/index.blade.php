@@ -37,7 +37,7 @@
   @foreach ($years as $year)
     <div data-filter=".{{ $year }}" class="cbp-filter-item"> {{ $year }} 年份 </div> |
   @endforeach
-  <div class="cbp-filter-item"> <a href="/">全部期刊</a> </div>
+  <div class="cbp-filter-item"> <a href="/magazines">全部期刊</a> </div>
   </div><!--/end Filters Container-->
 </div>
 <div id="grid-container" class="cbp-l-grid-agency">
