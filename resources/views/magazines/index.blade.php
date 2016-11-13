@@ -4,7 +4,7 @@
   <!--=== Cube-Portfdlio ===-->
   <div class="content-xs">
     <div id="filters-container" class="cbp-l-filters-text content-xs">
-      <div data-filter="*" class="{{ $queryYear ?: 'cbp-filter-item-active' }} cbp-filter-item"> 最新 </div> |
+      <div data-filter="*" class="{{ $queryYear ?: 'cbp-filter-item-active' }} {{ empty($queryYear) ?: 'cbp-redirect' }} cbp-filter-item"> 最新 </div> |
       @foreach ($years as $year)
         <div data-filter=".{{ $year }}" 
              class="cbp-filter-item {{ empty($queryYear) ?: 'cbp-redirect' }}">
