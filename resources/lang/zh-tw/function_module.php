@@ -20,4 +20,5 @@ return [
     'videos' => '影片管理',
     'users' => '使用者管理',
     'system' => '系統管理',
+    'user.setting' => '更新密碼',
 ];

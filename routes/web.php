@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Middleware\ActiveUser;
+
 Route::resource('/', 'HomeController');
 Route::resource('news', 'NewsController');
 Route::resource('magazines', 'MagazinesController');
@@ -38,19 +40,25 @@ Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin', 
     'middleware' => 'auth',
+    'middleware' => ActiveUser::class,
 ], function() {
-    Route::resource('/', 'DashboardController');
+    Route::resource('/', 'CarouselsController');
 
     Route::put('carousels/order', 'CarouselsController@order');
     Route::resource('carousels', 'CarouselsController');
     Route::resource('news', 'NewsController');
     Route::resource('magazines', 'MagazinesController');
     Route::resource('videos', 'VideosController');
+
+    Route::get('users/setting', 'UsersController@setting');
+    Route::put('users/update-setting', 'UsersController@updateSetting');
     Route::resource('users', 'UsersController');
     Route::resource('system', 'SystemController');
 });
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/auth/google', 'Auth\GoogleController@redirect');
 Route::get('/auth/google/callback', 'Auth\GoogleController@callback');

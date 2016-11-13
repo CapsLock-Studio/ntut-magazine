@@ -37,6 +37,11 @@
       </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <li>
+            <a href="/admin/users/setting">
+              <i class="fa fa-gear"></i>
+            </a>
+          </li>
           <li class="dropdown">
             <a href="/logout">
               <span class="hidden-xs">登出</span>
@@ -49,12 +54,6 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="{{ @$controller_dashboard }}">
-          <a href="/">
-            <i class="fa fa-dashboard"></i>
-            <span>儀表板</span>
-          </a>
-        </li>
         <li class="{{ @$controller_carousels }}">
           <a href="/admin/carousels">
             <i class="fa fa-exchange"></i>
