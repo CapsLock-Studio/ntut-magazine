@@ -1,15 +1,18 @@
 @extends('layouts.app')
 @section('content')
 <div class="container content-md text-center">
-  <div class="margin-bottom-20">
-    <button class="btn btn-default" id="prev">上一頁</button>
-    <button class="btn btn-default" id="next">下一頁</button>
-    &nbsp; &nbsp;
-    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-  </div>
-
   <div class="row">
-    <div class="col-md-8 col-md-offset-2 col-sm-12">
+    <div class="col-md-10 col-md-offset-1 col-sm-12">
+      <div class="margin-bottom-20">
+        <div class="text-left">
+          <button class="btn btn-default" id="prev">上一頁</button>
+          <button class="btn btn-default" id="next">下一頁</button>
+          <a class="btn btn-default" href="{{ $magazine->attachUrl }}"><i class="fa fa-fw fa-cloud-download"></i>下載</a>
+          <div class="pull-right" style="padding-top: 6px;">
+            <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+          </div>
+        </div>
+      </div>
       <canvas id="the-canvas" style="border:1px solid rgba(0,0,0,.04)!important;box-shadow:0 1px 7px rgba(0,0,0,.05);width: 100%;height: 100%;"></canvas>
     </div>
   </div>
