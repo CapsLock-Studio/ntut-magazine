@@ -10,7 +10,7 @@ class NewsController extends Controller
 {
     function index(Request $request)
     {
-        view()->share('news', News::orderBy('publishedAt')->paginate(25));
+        view()->share('news', News::orderBy('publishedAt', 'desc')->paginate(25));
     }
 
     function show(Request $request, $id)

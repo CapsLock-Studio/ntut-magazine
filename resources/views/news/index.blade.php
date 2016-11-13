@@ -11,9 +11,9 @@
           <ul class="list-inline posted-info">
             <li>發佈於&nbsp;&nbsp;{{ trans("months.{$eachNews->publishedAt->format('F')}") }}&nbsp;{{ $eachNews->publishedAt->format('d, Y') }}</li>
           </ul>
-          <h2><a href="/news/{{ $eachNews->id }}/{{ $eachNews->title }}">{{ $eachNews->title }}</a></h2>
+          <h2><a href="/news/{{ $eachNews->id }}">{{ $eachNews->title }}</a></h2>
           <p>{{ mb_strimwidth(strip_tags($eachNews->content), 0, 200, "...") }}</p>
-          <div><a href="/news/{{ $eachNews->id }}/{{ $eachNews->title }}" class="btn btn-link">看詳細內容</a></div>
+          <div><a href="/news/{{ $eachNews->id }}" class="btn btn-link">看詳細內容</a></div>
         </div>
       </div>
     </div>
