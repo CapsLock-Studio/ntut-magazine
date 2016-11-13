@@ -39,7 +39,6 @@ Route::group([
     'namespace' => 'Admin', 
     'middleware' => 'auth',
 ], function() {
-    Route::resource('/', 'DashboardController');
 
     Route::put('carousels/order', 'CarouselsController@order');
     Route::resource('carousels', 'CarouselsController');

@@ -49,12 +49,6 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="{{ @$controller_dashboard }}">
-          <a href="/">
-            <i class="fa fa-dashboard"></i>
-            <span>儀表板</span>
-          </a>
-        </li>
         <li class="{{ @$controller_carousels }}">
           <a href="/admin/carousels">
             <i class="fa fa-exchange"></i>
