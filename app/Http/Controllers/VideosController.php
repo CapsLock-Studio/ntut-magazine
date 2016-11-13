@@ -10,7 +10,6 @@ class VideosController extends Controller
 {
     function index(Request $request)
     {
-        view()->share('channelIds', Video::select('channelId')->groupBy('channelId')->get()->map(function($video) { return $video->channelId; }));
         view()->share('videos', Video::orderBy('id', 'desc')->get());
     }
 
