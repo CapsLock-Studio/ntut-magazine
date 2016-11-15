@@ -36,7 +36,7 @@
           <a href="/news">消息發佈</a>
         </li>
         <li class="{{ @$controller_magazines }}">
-          <a href="/magazines">校訓期刊</a>
+          <a href="/magazines">校訊期刊</a>
         </li>
         <!-- Videos -->
         <li class="dropdown {{ @$controller_videos }}">
