@@ -12,7 +12,8 @@
         "doctrine/dbal": "^2.5",
         "mews/purifier": "^2.0",
         "spatie/pdf-to-image": "^1.2",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "capslock-studio/node-deploy-server-php-pusher": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
