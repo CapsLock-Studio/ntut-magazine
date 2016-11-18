@@ -1,14 +1,27 @@
 @extends('layouts.app')
 @section('content')
-<div class="container content-md text-center">
+<div id="zoom-target-2" class="container content-md text-center">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1 col-sm-12">
-      <div class="margin-bottom-20">
-        <div class="text-left">
-          <button class="btn btn-default" id="prev">上一頁</button>
-          <button class="btn btn-default" id="next">下一頁</button>
-          <a class="btn btn-default" href="{{ $magazine->attachUrl }}"><i class="fa fa-fw fa-cloud-download"></i>下載</a>
-          <div class="pull-right" style="padding-top: 6px;">
+    <div id="zoom-target-1" class="col-md-12 col-sm-12">
+      <div class="row margin-bottom-20">
+        <div class="col-sm-4 col-xs-12">
+          <div class="btn-toolbar">
+            <button class="btn btn-default" id="prev">上一頁</button>
+            <button class="btn btn-default" id="next">下一頁</button>
+            <a class="btn btn-default" href="{{ $magazine->attachUrl }}"><i class="fa fa-fw fa-cloud-download"></i>下載</a>
+          </div>
+        </div>
+        <div class="col-xs-12 margin-bottom-10 visible-xs"></div>
+        <div class="col-sm-4 col-xs-6">
+          <button class="btn btn-default" id="zoom-in">
+            <i class="fa fa-search-plus"></i>
+          </button>
+          <button class="btn btn-default" id="zoom-out">
+            <i class="fa fa-search-minus"></i>
+          </button>
+        </div>
+        <div class="col-sm-4 col-xs-6 text-right">
+          <div style="padding-top: 6px;">
             <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
           </div>
         </div>
@@ -135,5 +148,47 @@
     // Initial/first page rendering
     renderPage(pageNum);
   });
+</script>
+<script>
+  var zoomScale = 2;
+
+  $('#zoom-in').on('click', function() {
+    if (zoomScale > 2) {
+      return;
+    }
+
+    $('#zoom-out').removeClass('disabled');
+
+    if (zoomScale == 1) {
+      $('#zoom-target-1').removeClass('col-md-10 col-md-offset-1').addClass('col-md-12');
+    }
+
+    if (zoomScale == 2) {
+      $('#zoom-target-2').removeClass('container');
+      $('#zoom-in').addClass('disabled');
+    }
+
+    zoomScale += 1;
+  });
+
+  $('#zoom-out').on('click', function() {
+    if (zoomScale < 2) {
+      return;
+    }
+
+    $('#zoom-in').removeClass('disabled');
+
+    if (zoomScale == 2) {
+      $('#zoom-target-1').addClass('col-md-10 col-md-offset-1').removeClass('col-md-12');
+      $('#zoom-out').addClass('disabled');
+    }
+
+    if (zoomScale == 3) {
+      $('#zoom-target-2').addClass('container');
+    }
+
+    zoomScale -= 1;
+  });
+
 </script>
 @endsection
