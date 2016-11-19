@@ -4,9 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7d7c17739483ed342d6b172350af201c",
-    "content-hash": "9e37d09f6ac483a009ef54e6e6f9b4c9",
+    "hash": "634f0603e1a9fed351b039b7ea1f4a47",
+    "content-hash": "c4c90e085356ab1ddf82938622544b27",
     "packages": [
+        {
+            "name": "capslock-studio/node-deploy-server-php-pusher",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CapsLock-Studio/node-deploy-server-php-pusher.git",
+                "reference": "9e09c2a76771807870c992eaaa34ac454c7279df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CapsLock-Studio/node-deploy-server-php-pusher/zipball/9e09c2a76771807870c992eaaa34ac454c7279df",
+                "reference": "9e09c2a76771807870c992eaaa34ac454c7279df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "internations/http-mock": "^0.8.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "bin": [
+                "deploy-pusher"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CapsLockStudio\\Deploy\\Pusher\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "michael34435",
+                    "email": "michael34435@capslock.tw"
+                }
+            ],
+            "description": "Lightweight cross platform self-hosted deployment server solution client in PHP.",
+            "time": "2016-11-19 17:32:09"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -4756,7 +4799,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "capslock-studio/node-deploy-server-php-pusher": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
