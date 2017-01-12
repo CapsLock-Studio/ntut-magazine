@@ -68,7 +68,7 @@
   <script type="text/javascript" src="/dist/js/custom.js"></script>
   <!-- JS Page Level -->
   <script type="text/javascript" src="/dist/js/app-unify.js"></script>
-  <script type="text/javascript" src="/dist/js/plugins/cube-portfolio/cube-portfolio-2-ns.js"></script>
+  <script type="text/javascript" src="/dist/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
   <script type="text/javascript">
     jQuery(document).ready(function() {
       App.init();
