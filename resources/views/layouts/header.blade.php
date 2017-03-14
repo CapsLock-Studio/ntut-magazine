@@ -3,7 +3,7 @@
     <!-- Logo -->
     <a class="logo" href="/">
       <span class="large">
-        臺北國立科技大學校訊
+        國立臺北科技大學校訊
       </span>
       <div class="sub">
         <span class="text-info">Taipei Tech Gazette</span>
@@ -13,7 +13,7 @@
     <!-- Topbar -->
     <div class="topbar">
       <ul class="loginbar pull-right">
-        <li><a href="mailto:imhannah@ntut.edu.tw"><i class="fa fa-fw fa-envelope"></i> 聯絡我們</a></li>
+        <li><a href="mailto:winnie15@ntut.edu.tw"><i class="fa fa-fw fa-envelope"></i> 聯絡我們</a></li>
       </ul>
     </div>
     <!-- End Topbar -->
